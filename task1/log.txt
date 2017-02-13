@@ -1,0 +1,11 @@
+commit 96078371a2b36a3a5a73f9fbb0af82358166d505
+Author: danilyanich <danilyanich@gmail.com>
+Date:   Mon Feb 13 23:06:47 2017 +0300
+
+    added status
+
+commit 4d1fefc9900045183f6ced774fef1eecd01cc374
+Author: danilyanich <danilyanich@gmail.com>
+Date:   Mon Feb 13 23:05:41 2017 +0300
+
+    added .gitignore
