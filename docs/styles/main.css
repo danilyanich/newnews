@@ -1,0 +1,29 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    display: block;
+    background: transparent;
+    font-family: 'Roboto', sans-serif;
+}
+
+b {
+    font-size: inherit;
+    font-weight: 500;
+}
+
+li {
+    float: left;
+}
+
+.overflow-content {
+    padding: 15% 25% 15% 25%;
+    background: rgba(0,0,0, 0.5);
+}
+
+.animatable {
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
