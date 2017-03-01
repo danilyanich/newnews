@@ -3,13 +3,16 @@
     <head>
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;subset=latin-ext"
             rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="styles/main.css">
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
     </head>
     <body>
-        <header class="header-fixed">
-            <ul class="header-list">
-                <li><span class="button" style="background: #171717;">
+        <div class="intro" id="pass">
+            <img src="./img/logo.png" style="width:100%; height:500px;object-fit: cover;"/>
+        </div>
+        <header class="header">
+            <ul id="grab" class="header-list animatable">
+                <li id="left-button" class="animatable"><span class="button" style="background: #171717;">
                     <!--inline menu-icon-->
                     <svg width="50px" height="50px" style="background: transparent;">
                         <line x1="10" y1="15" x2="40" y2="15" style="stroke: white; stroke-width: 2"/>
@@ -25,11 +28,11 @@
                         <li><span class="button" style="background: transparent;">
                             <!--inline search-->
                             <svg width="50px" height="50px" style="background: transparent;">
-                                <line x1="10" y1="40" x2="30" y2="20" style="stroke: #5d5d5d; stroke-width: 2"/>
-                                <circle cx="30" cy="20" r="10" style="stroke: #5d5d5d; fill: white; stroke-width:2;"/>
+                                <line x1="10" y1="40" x2="23" y2="26" style="stroke: #5d5d5d; stroke-width: 2"/>
+                                <circle cx="30" cy="20" r="10" style="stroke: #5d5d5d; fill: transparent; stroke-width:2;"/>
                             </svg>
                         </span></li>
-                        <li><span class="button" style="background: #4dc1a0;">
+                        <li id="right-button" class="animatable"><span class="button" style="background: #4dc1a0;">
                             <!--inline plus-->
                             <svg width="50px" height="50px" style="background: transparent;">
                                 <line x1="10" y1="25" x2="40" y2="25" style="stroke: white; stroke-width: 2"/>
@@ -40,12 +43,10 @@
                 </li>
             </ul>
         </header>
-        <div class="intro">
-        </div>
         <div class="content">
             <div class="column">
                 <img class="post" src="./img/1.jpg" width="100%"/>
-                <img class="post" src="./img/4.jpg" width="100%"/>
+                <a href="./detailed_post.html"><img class="post" src="./img/4.jpg" width="100%"/></a>
                 <img class="post" src="./img/5.jpg" width="100%"/>
                 <img class="post" src="./img/2.jpg" width="100%"/>
             </div>
@@ -69,4 +70,6 @@
             </div>
         </div>
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="scripts/scroll_than_fix.js"></script>
 </html>
