@@ -1,4 +1,4 @@
-var generateLoremIpsum = function(len) {
+var generateLoremIpsum = function(len, bound) {
     var words = ['lorem',
                                         'ipsum',
                                         'dolor',
@@ -180,8 +180,10 @@ var generateLoremIpsum = function(len) {
                                     ];
     var extracted = [];
 
+    bound = bound || words.length;
+
     for (var i = 0; i < len; i++) {
-        var word = Math.floor(Math.random() * words.length);
+        var word = Math.floor(Math.random() * bound);
         extracted[i] = words[word];
     }
     return extracted.join(' ');
