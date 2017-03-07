@@ -1,4 +1,5 @@
-var generateLoremIpsum = function(len, bound) {
+
+var loremIpsum = (function() {
     var words = ['lorem',
                                         'ipsum',
                                         'dolor',
@@ -178,20 +179,29 @@ var generateLoremIpsum = function(len, bound) {
                                         'risus',
                                         'cras'
                                     ];
-    var extracted = [];
 
-    bound = bound || words.length;
+    var generate = function(len, bound) {
+        var extracted = [];
 
-    for (var i = 0; i < len; i++) {
-        var word = Math.floor(Math.random() * bound);
-        extracted[i] = words[word];
+        bound = bound || words.length;
+
+        for (var i = 0; i < len; i++) {
+            var word = Math.floor(Math.random() * bound);
+            extracted[i] = words[word];
+        }
+        return extracted.join(' ');
     }
-    return extracted.join(' ');
-};
 
-var lorems = document.getElementsByClassName('lorem-ipsum');
-for (var i = 0; i < lorems.length; i++) {
-    len = lorems[i].getAttribute('lorem-ipsum-len');
-    if(!len) len =  Math.random()*100 + 2;
-    lorems[i].innerHTML = generateLoremIpsum(len);
-}
+    return {
+        generate: generate
+    };
+})();
+
+(function() {
+    var lorems = document.getElementsByClassName('lorem-ipsum');
+    for (var i = 0; i < lorems.length; i++) {
+        len = lorems[i].getAttribute('lorem-ipsum-len');
+        if(!len) len =  Math.random()*100 + 2;
+        lorems[i].innerHTML = loremIpsum.generate(len);
+    }
+})();
