@@ -2,28 +2,66 @@
 * {
     margin: 0;
     padding: 0;
-    display: block;
     background: transparent;
-    font-family: 'Roboto', sans-serif;
+    transition: inherit;
+    font-smoothing: antialiased;
 }
 
-b {
-    font-size: inherit;
-    font-weight: 500;
-}
-
-li {
-    float: left;
-}
-
-.overflow-content {
-    padding: 15% 25% 15% 25%;
-    background: rgba(0,0,0, 0.5);
+body {
+    background: #B9B9B9;
 }
 
 .animatable {
-    -webkit-transition: all 0.2s ease;
-    -moz-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
+}
+
+.v-align {
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+
+
+
+.content-caption-text {
+    color: #464646;
+}
+
+.post-info-text {
+    color: #747474;
+}
+
+.tags-text {
+    color: #A2A2A2
+}
+
+.roboto-slab {
+    font-family: 'Roboto Slab', serif;
+}
+
+.open-sans {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.roboto-condenced {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.small-text {
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.big-text {
+    font-size: 50px;
+    font-weight: 100;
+}
+
+.logo-text {
+    font-size: 20;
+    font-weight: 100;
 }
