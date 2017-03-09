@@ -181,12 +181,18 @@ var loremIpsum = (function() {
                                     ];
 
     var generate = function(len, bound, config) {
+
         var extracted = [];
 
         bound = bound || words.length;
         config = config || {
             dots: true,
             capital: true
+        }
+
+        if (len == 1) {
+            var word = Math.floor(Math.random() * bound);
+            return words[word].charAt(0).toUpperCase() + words[word].slice(1)
         }
 
         var wordsCount = 0;
@@ -200,20 +206,27 @@ var loremIpsum = (function() {
                 extracted[wordsCount] = words[word];
             for (var i = 1; i < sentence; i++) {
                 wordsCount++;
+                if(wordsCount >= len)
+                    break;
                 word = Math.floor(Math.random() * bound);
                 extracted[wordsCount] = words[word];
-                if(wordsCount + 1 >= len)
-                    break;
             }
-            if (config.dots)
+            if (config.dots && wordsCount < len)
                 extracted[wordsCount] += '.';
             wordsCount++;
         }
+        if (config.dots && wordsCount >= len)
+            return extracted.join(' ') + '.';
         return extracted.join(' ');
     }
 
+    var randomDate = function (start, end) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    }
+
     return {
-        generate: generate
+        generate: generate,
+        randomDate: randomDate
     };
 })();
 

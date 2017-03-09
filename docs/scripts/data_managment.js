@@ -1,9 +1,6 @@
 
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
 var articlesHandle = (function () {
+
     var sortArticles = function (array) {
         array.sort(function(obj1, obj2){
             return obj1.createdAt - obj2.createdAt;
@@ -13,23 +10,56 @@ var articlesHandle = (function () {
     var articles = []
     var tags = new Set();
 
-    (function() {
-        for(var i = 0; i < 20; i++) {
-            var article = {
-                id: ''+i,
-                title: loremIpsum.generate(5),
-                summary: loremIpsum.generate(10),
-                createdAt: randomDate(new Date(2017,1,0), new Date()),
-                author: loremIpsum.generate(2),
-                content: loremIpsum.generate(50),
-                tags: [loremIpsum.generate(1, 20), loremIpsum.generate(1, 20)]
-            }
-            articles[i] = article;
-            for(tag of article.tags)
-                tags.add(tag);
+    Date.prototype.getMonthName = function() {
+        return Date.locale.month_names[this.getMonth()];
+    };
+    Date.prototype.prettyFormat = function () {
+        return this.getDay() + ' ' + this.getMonthName().toUpperCase() + ' ' + this.getHours() + ':' + this.getMinutes();
+    };
+    Date.locale = {
+        month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    };
+
+    for(var i = 0; i < 15; i++) {
+        var a = {
+            id: '' + i,
+            image: 'img/' + (i + 1) + '.jpg',
+            title: loremIpsum.generate(5, null, {capital: true, dots: false}),
+            summary: loremIpsum.generate(15 + Math.random()*30),
+            createdAt: loremIpsum.randomDate(new Date(2017,1,0), new Date()),
+            author: loremIpsum.generate(2, null, {dots: false, capital: true}),
+            content: loremIpsum.generate(10 + Math.random()*36),
+            tags: [loremIpsum.generate(1), loremIpsum.generate(1),  loremIpsum.generate(1), loremIpsum.generate(1)]
         }
-        sortArticles(articles);
-    })();
+        articles[i] = a;
+        for(tag of a.tags)
+            tags.add(tag);
+    }
+
+    sortArticles(articles);
+
+    var template = document.getElementById('post-template');
+    var handle = document.getElementById('post-placeholder');
+
+    var makePostHTML = function (article) {
+        var postWrap = template.cloneNode(true).querySelector('.post-wrap');
+        post = postWrap.querySelector('.post');
+
+        post.id = article.id;
+        post.querySelector('img').src = article.image;
+        post.querySelector('.post-caption').innerHTML = article.title;
+        post.querySelector('.info-bar').innerHTML =
+            article.createdAt.prettyFormat() + ' by' +
+            '<span>' + article.author + '</span>';
+        post.querySelector('.summary').innerHTML = article.summary;
+        post.querySelector('.tags-line .tags').innerHTML = article.tags.join(' ');
+
+        return postWrap;
+    }
+
+    for (var i = 0; i < 15; i++) {
+        handle.appendChild(makePostHTML(articles[i]));
+    }
 
     var getArticles = function (pages, filter) {
         if(!pages) pages = new Object();
@@ -111,7 +141,8 @@ var articlesHandle = (function () {
         add: addArticle,
         edit: editArticle,
         remove: removeArticle,
-        tags: tags
+        tags: tags,
+        makePostHTML: makePostHTML
     };
 })();
 

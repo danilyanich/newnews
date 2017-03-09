@@ -7,7 +7,22 @@
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
     </head>
+
     <body>
+        <div id="post-template" style="display: none;">
+            <div class="post-wrap">
+                <div class="post">
+                    <img></img>
+                    <div class="post-caption"></div>
+                    <div class="info-bar v-align"></div>
+                    <div class="summary"></div>
+                    <div class="tags-line v-align">
+                        <span style="font-weight:600;padding-right:5px;">#</span>
+                        <span class="tags"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="middle-wrap">
             <div class="middle-content">
                 <header class="header v-align">
@@ -32,69 +47,12 @@
                         <circle cx="40" cy="30" r="10" style="stroke:#ffffff;stroke-width:1.1;fill:#2E2E2E;"/>
                     </svg>
                 </div>
-                <div class="content animatable">
-                    <div class="post-wrap">
-                        <div class="post">
-                            <img src="img/4.jpg"/>
-                            <div class="post-caption">Photorealism CG Rendering</div>
-                            <div class="info-bar v-align">
-                                8 MARCH 2:01 by<span>NASTASIA LESNAYA</span>
-                            </div>
-                            <div class="summary lorem-ipsum" lorem-ipsum-len="36"></div>
-                            <div class="tags-line v-align">
-                                <span style="font-weight:600;padding-right:5px;">#</span>
-                                <span class="lorem-ipsum" lorem-ipsum-len="4"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-wrap">
-                        <div class="post">
-                            <img src="img/5.jpg"/>
-                            <div class="post-caption lorem-ipsum" lorem-ipsum-len="4"></div>
-                            <div class="info-bar v-align">
-                                8 MARCH 2:01 by<span class="lorem-ipsum" lorem-ipsum-len="2"></span>
-                            </div>
-                            <div class="summary lorem-ipsum" lorem-ipsum-len="50"></div>
-                            <div class="tags-line v-align">
-                                <span style="font-weight:600;padding-right:5px;">#</span>
-                                <span class="lorem-ipsum" lorem-ipsum-len="4"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-wrap">
-                        <div class="post">
-                            <img src="img/12.jpg"/>
-                            <div class="post-caption lorem-ipsum" lorem-ipsum-len="4"></div>
-                            <div class="info-bar v-align">
-                                8 MARCH 2:01 by<span class="lorem-ipsum" lorem-ipsum-len="2"></span>
-                            </div>
-                            <div class="summary lorem-ipsum" lorem-ipsum-len="10"></div>
-                            <div class="tags-line v-align">
-                                <span style="font-weight:600;padding-right:5px;">#</span>
-                                <span class="lorem-ipsum" lorem-ipsum-len="4"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-wrap">
-                        <div class="post">
-                            <img src="img/7.jpg"/>
-                            <div class="post-caption lorem-ipsum" lorem-ipsum-len="4"></div>
-                            <div class="info-bar v-align">
-                                8 MARCH 2:01 by<span class="lorem-ipsum" lorem-ipsum-len="2"></span>
-                            </div>
-                            <div class="summary lorem-ipsum" lorem-ipsum-len="70"></div>
-                            <div class="tags-line v-align">
-                                <span style="font-weight:600;padding-right:5px;">#</span>
-                                <span class="lorem-ipsum" lorem-ipsum-len="4"></span>
-                            </div>
-                        </div>
-                    </div>
+                <div id="post-placeholder" class="content animatable">
                 </div>
-                <div class="show-more v-align">
-                    show more
-                </div>
+                <div class="show-more v-align">show more</div>
             </div>
         </div>
         <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
+        <script type="text/javascript" src="scripts/data_managment.js"></script>
     </body>
 </html>
