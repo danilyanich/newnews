@@ -180,14 +180,34 @@ var loremIpsum = (function() {
                                         'cras'
                                     ];
 
-    var generate = function(len, bound) {
+    var generate = function(len, bound, config) {
         var extracted = [];
 
         bound = bound || words.length;
+        config = config || {
+            dots: true,
+            capital: true
+        }
 
-        for (var i = 0; i < len; i++) {
+        var wordsCount = 0;
+
+        while (wordsCount < len) {
+            var sentence = Math.floor(Math.random()*5) + 4;
             var word = Math.floor(Math.random() * bound);
-            extracted[i] = words[word];
+            if (config.capital)
+                extracted[wordsCount] = words[word].charAt(0).toUpperCase() + words[word].slice(1);
+            else
+                extracted[wordsCount] = words[word];
+            for (var i = 1; i < sentence; i++) {
+                wordsCount++;
+                word = Math.floor(Math.random() * bound);
+                extracted[wordsCount] = words[word];
+                if(wordsCount + 1 >= len)
+                    break;
+            }
+            if (config.dots)
+                extracted[wordsCount] += '.';
+            wordsCount++;
         }
         return extracted.join(' ');
     }
@@ -201,7 +221,9 @@ var loremIpsum = (function() {
     var lorems = document.getElementsByClassName('lorem-ipsum');
     for (var i = 0; i < lorems.length; i++) {
         len = lorems[i].getAttribute('lorem-ipsum-len');
-        if(!len) len =  Math.random()*100 + 2;
-        lorems[i].innerHTML = loremIpsum.generate(len);
+        if (!len) len =  Math.random()*100 + 2;
+        if (len <= 5) var config = {dots: false, capital: true};
+        lorems[i].innerHTML = loremIpsum.generate(len, null, config || null);
+        config = null;
     }
 })();
