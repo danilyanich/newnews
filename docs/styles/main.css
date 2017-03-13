@@ -4,7 +4,7 @@
     padding: 0;
     background: transparent;
     transition: inherit;
-    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -12,11 +12,29 @@ body {
 }
 
 .animatable {
-    transition: all 0.2s ease;
+    transition: all 0.5s ease;
 }
 
 .v-align {
     height: inherit;
     display: flex;
     align-items: center;
+}
+
+.blur {
+    backdrop-filter: blur(20px);
+}
+
+.top-fixed-wrap {
+    position:fixed;
+    height: 0;
+    top: 0;
+}
+
+.static-background {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-image: url('../img/patterns/2.jpg');
+    background-repeat: repeat;
 }
