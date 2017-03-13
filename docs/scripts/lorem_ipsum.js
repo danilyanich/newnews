@@ -230,7 +230,7 @@ var loremIpsum = (function() {
     };
 })();
 
-(function() {
+document.addEventListener('DOMContentLoaded', function(event) {
     var lorems = document.getElementsByClassName('lorem-ipsum');
     for (var i = 0; i < lorems.length; i++) {
         len = lorems[i].getAttribute('lorem-ipsum-len');
@@ -239,4 +239,4 @@ var loremIpsum = (function() {
         lorems[i].innerHTML = loremIpsum.generate(len, null, config || null);
         config = null;
     }
-})();
+});
