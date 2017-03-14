@@ -1,110 +1,133 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.8">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Roboto+Condensed:700|Roboto+Slab:100,300"
-            rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="styles/main.css">
-        <link rel="stylesheet" type="text/css" href="styles/styles.css">
-    </head>
-    <body>
-        <template id="post-template">
-            <div class="post-wrap">
-                <div class="post">
-                    <img></img>
-                    <div class="post-caption"></div>
-                    <div class="info-bar v-align"></div>
-                    <div class="summary"></div>
-                    <div class="tags-line v-align">
-                        <span style="font-weight:600;padding-right:5px;">#</span>
-                        <span class="tags"></span>
-                    </div>
-                </div>
-            </div>
-        </template>
-        <div class="top-fixed-wrap" style="z-index: 20;">
-            <div class="fullscreen-scrollable-wrap" style="display: none;">
-                <div class="middle-wrap">
-                    <div class="middle-content">
-                        <div class="search-bar-wrap">
-                            <div class="search-bar v-align" style="position:fixed;">
-                                <span class="search-text">
-                                    Edit
-                                </span>
-                                <
-                            </div>
-                        </div>
-                        <div class="post-wrap" style="width:100%; padding: 0;">
-                            <div class="post">
-                                <img></img>
-                                <div class="post-caption"></div>
-                                <div class="info-bar v-align"></div>
-                                <div class="summary"></div>
-                                <div class="tags-line v-align">
-                                    <span style="font-weight:600;padding-right:5px;">#</span>
-                                    <span class="tags"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="top-fixed-wrap" style="z-index: -10;">
-            <div class="static-background"></div>
-        </div>
-        <div class="middle-wrap">
-            <div class="middle-content">
-                <header class="header v-align">
-                    <span class="logo"
-                        style="padding-bottom: 9px;">
-                        <span>new</span>news</span>
-                    <div class="v-align">
-                        <div class="username">authorize</div>
-                        <!--inline svg-->
-                        <svg style="width:40px; height:40px;">
-                            <circle cx="20" cy="20" r="20" style="fill:#00B3B3;"/>
-                        </svg>
-                    </div>
-                </header>
-                <div class="intro-wrap v-align">
-                    <div class="mega-logo v-align">
-                        <div><div>YOUR</div>
-                        <div class="mega-logo-mega-text">INSPIRATION</div></div>
-                    </div>
-                    <div id="plus" class="v-align username">
-                        <!--ADD<br/>POST-->
-                        <svg class="light-svg" style="stroke:#ffffff;stroke-width:2px;">
-                            <line x1="35" y1="10" x2="35" y2="60"/>
-                            <line x1="10" y1="35" x2="60" y2="35"/>
-                            <circle cx="35" cy="35" r="40"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="search-bar-wrap">
-                    <div class="search-bar v-align animatable">
-                        <input placeholder="Search..." class="search-text"></input>
-                        <!--inline svg-->
-                        <svg class="light-svg">
-                            <line x1="20" y1="50" x2="33.5" y2="36.5"/>
-                            <circle cx="40" cy="30" r="10"/>
-                        </svg>
-                    </div>
-                </div>
-                <div id="post-placeholder" class="content animatable">
-                </div>
-                <div class="show-more v-align">show more</div>
-            </div>
-        </div>
-        <div class="footer v-align">
-            by danilyanich
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Roboto+Condensed:700|Roboto+Slab:100,300"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+
+    <template id="post-template">
+    <div class="post-wrap">
+    <div class="post">
+
+        <img></img>
+        <div class="post-caption link-text"></div>
+        <div class="info-bar v-align"></div>
+        <div class="summary"></div>
+        <div class="tags-line v-align">
+            <span style="font-weight:600;padding-right:5px;" class="link-text">#</span>
+            <span class="tags"></span>
         </div>
 
+    </div></div></template>
+
+
+    <div class="top-fixed-wrap" style="z-index: 20;">
+    <div class="fullscreen-scrollable-wrap" style="display: none;">
+    <div class="middle-wrap">
+    <div class="middle-content">
+
+        <div class="search-bar-wrap">
+        <div class="search-bar v-align" style="position:fixed;">
+
+            <span class="search-text">
+                Edit
+            </span>
+            <svg class="light-svg">
+                <line x1="20" y1="20" x2="50" y2="50"/>
+                <line x1="50" y1="20" x2="20" y2="50"/>
+            </svg>
+
+        </div></div>
+
+        <form name="edit-post" class="post">
+
+            <div id="dragndrop">
+                Drop your image here
+            </div>
+
+            <div class="post-caption">CAPTION</div>
+            <div class="info-bar v-align">INFO by <span>AUTHOR</span></div>
+            <div class="summary">SUMMARY</div>
+            <div class="tags-line v-align">
+                <span style="font-weight:600;padding-right:5px;">#</span>
+                <span class="tags">TAGS</span>
+            </div>
+
+        </form>
+
+    </div></div></div></div>
+
+
+    <div class="top-fixed-wrap" style="z-index: -10;">
+        <div class="static-background"></div>
+    </div>
+
+
+    <div class="middle-wrap">
+    <div class="middle-content">
+
+        <header class="header v-align">
+            <span class="logo"
+                style="padding-bottom: 9px;">
+                <span>new</span>news</span>
+            <div class="v-align">
+                <div class="username">authorize</div>
+                <!--inline svg-->
+                <svg style="width:40px; height:40px;">
+                    <circle cx="20" cy="20" r="20" style="fill:#00B3B3;"/>
+                </svg>
+            </div>
+        </header>
+
+        <div class="intro-wrap v-align">
+            <div class="mega-logo v-align">
+                <div><div>YOUR</div>
+                <div class="mega-logo-mega-text">INSPIRATION</div>
+            </div></div>
+            <div id="plus" class="v-align username">
+                <span>ADD<br/>POST</span>
+                <svg class="light-svg">
+                    <line x1="35" y1="10" x2="35" y2="60"/>
+                    <line x1="10" y1="35" x2="60" y2="35"/>
+                    <circle cx="35" cy="35" r="35"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="search-bar-wrap">
+        <div class="search-bar v-align">
+
+            <input placeholder="Search..." class="search-text"></input>
+            <!--inline svg-->
+            <svg class="light-svg">
+                <line x1="20" y1="50" x2="33.5" y2="36.5"/>
+                <circle cx="40" cy="30" r="10"/>
+            </svg>
+
+        </div></div>
+
+        <div id="post-placeholder" class="content">
+        </div>
+
+        <div class="show-more v-align">show more</div>
+
+    </div></div>
+
+
+    <div class="footer v-align">by danilyanich</div>
+
+
+    <div id="scripts">
         <script type="text/javascript" src="scripts/sticky_search.js"></script>
         <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
         <script type="text/javascript" src="scripts/data_managment.js"></script>
         <script type="text/javascript" src="scripts/authorization.js"></script>
         <script type="text/javascript" src="scripts/logica.js"></script>
-    </body>
+    </div>
+</body>
 </html>

@@ -48,3 +48,11 @@ body {
     stroke-width: 1.2;
     fill: transparent;
 }
+
+.link-text {
+
+}
+
+.link-text:hover {
+    color: black;
+}
