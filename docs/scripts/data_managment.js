@@ -52,8 +52,10 @@ var data = (function () {
             }
             if (filter.tags) {
                 slice = slice.filter(function (article) {
-                    var tagsIntersect = filter.tags.filter(function(n) {
-                        return article.tags.indexOf(n) !== -1;
+                    var tagsIntersect = filter.tags.filter(function(tag) {
+                        return article.tags.some(function (element) {
+                            return element.toLowerCase() === tag.toLowerCase();
+                        });
                     });
                     return tagsIntersect.length > 0;
                 });
@@ -220,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         tags: ['kek', 'lol', 'foo', 'bar']
     }
     console.log(data.getMultiple());
-    console.log(data.getMultiple(null, {tags: ['lorem', 'ipsum']}));
+    console.log(data.getMultiple(null, {tags: ['lorem', 'ipsum', 'dolor', 'sit', 'amet']}));
     console.log(data.getMultiple({offset: 2, count: 5}));
     console.log(data.add(somepost));
     console.log(data.getMultiple(null, {tags: ['kek']}));
@@ -232,7 +234,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     console.log(data.add(somepost));
     console.log(dom.clear());
-    console.log(dom.display(data.getMultiple(null, {all: true})));
-    console.log(dom.remove('1'));
-    console.log(dom.remove('2'));
+    console.log(dom.display(data.getMultiple(null, {tags: ['lorem']})));
 });
