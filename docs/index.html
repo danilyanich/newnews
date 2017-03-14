@@ -35,7 +35,7 @@
         <div class="search-bar v-align" style="position:fixed;">
 
             <span class="search-text">
-                Edit
+                New post
             </span>
             <svg class="light-svg">
                 <line x1="20" y1="20" x2="50" y2="50"/>
@@ -44,21 +44,27 @@
 
         </div></div>
 
-        <form name="edit-post" class="post">
+        <form name="edit" class="post">
 
-            <div id="dragndrop">
+            <div name="dragndrop" id="dragndrop" class="animatable">
                 Drop your image here
             </div>
 
-            <div class="post-caption">CAPTION</div>
-            <div class="info-bar v-align">INFO by <span>AUTHOR</span></div>
-            <div class="summary">SUMMARY</div>
+            <textarea name="caption" class="post-caption" placeholder="Caption"></textarea>
+            <div name="info" class="info-bar v-align"></div>
+            <textarea name="summary" class="summary" placeholder="Summary"></textarea>
+            <textarea name="content" class="summary" placeholder="Content" style="height: 50vh;"></textarea>
             <div class="tags-line v-align">
                 <span style="font-weight:600;padding-right:5px;">#</span>
-                <span class="tags">TAGS</span>
+                <input name="tags" class="tags" placeholder="Tags"></input>
             </div>
 
         </form>
+
+        <div class="search-bar">
+            <span class="form-button">Discard</span>
+            <span class="form-button">Add</span>
+        </div>
 
     </div></div></div></div>
 

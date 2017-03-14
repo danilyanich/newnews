@@ -56,3 +56,15 @@ body {
 .link-text:hover {
     color: black;
 }
+
+textarea, input {
+   border: none;
+   outline: none;
+   resize: none;
+   width: 100%;
+}
+
+textarea:focus, input:focus {
+   outline: none;
+   cursor: auto;
+}
