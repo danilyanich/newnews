@@ -1,6 +1,7 @@
+'uses strict';
 
 document.addEventListener('DOMContentLoaded', function(event) {
-    var searchBar = document.querySelector('div.search-bar.v-align.animatable');
+    var searchBar = document.querySelector('body>div.middle-wrap div.search-bar.v-align');
     var pass = document.querySelector('html>body>div.middle-wrap>div.middle-content>div.search-bar-wrap');
     window.addEventListener('scroll', function() {
         if (pass.getBoundingClientRect().top < 0) {

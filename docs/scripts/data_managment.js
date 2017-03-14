@@ -161,9 +161,10 @@ var dom = (function () {
         post.querySelector('.post-caption').innerHTML = article.title;
         post.querySelector('.info-bar').innerHTML =
             article.createdAt.prettyFormat() + ' by' +
-            '<span>' + article.author + '</span>';
+            '<span class="link-text">' + article.author + '</span>';
         post.querySelector('.summary').innerHTML = article.summary;
-        post.querySelector('.tags-line .tags').innerHTML = article.tags.join(' ');
+        var tags = '<span class="link-text">' +  article.tags.join('</span><span class="link-text">') + '</span>';
+        post.querySelector('.tags-line .tags').innerHTML = tags;
 
         return postWrap;
     }
