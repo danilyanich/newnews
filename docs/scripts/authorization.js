@@ -3,19 +3,35 @@ var authorization = (function () {
 
     var changeUser = function (username) {
         user = username || null;
+        authorize();
     }
 
     var authorize = function (event) {
-        event.currentTarget.querySelector('.username').innerHTML = user || 'authorize';
+        if (user) {
+            document.querySelector('header.header.v-align div.v-align .username').innerHTML = user;
+            document.getElementById('plus').style.display = 'flex';
+        } else {
+            document.querySelector('header.header.v-align div.v-align .username').innerHTML = 'log in';
+            document.getElementById('plus').style.display = 'none';
+        }
+    }
+
+    var getUser = function () {
+        return user.toString();
     }
 
     document.addEventListener('DOMContentLoaded', function(event) {
         document.querySelector('header.header.v-align div.v-align')
-            .addEventListener('click', authorize);
+            .addEventListener('click', function(event){
+                alert('authorize dankr');
+                changeUser('dankr');
+            });
+        authorize();
     });
 
     return {
         authorize: authorize,
-        changeUser: changeUser
+        changeUser: changeUser,
+        getUser: getUser
     }
 })();
