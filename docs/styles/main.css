@@ -5,6 +5,7 @@
     background: transparent;
     transition: inherit;
     -webkit-font-smoothing: antialiased;
+    cursor: default;
 }
 
 body {
@@ -16,7 +17,6 @@ body {
 }
 
 .v-align {
-    height: inherit;
     display: flex;
     align-items: center;
 }
@@ -37,4 +37,14 @@ body {
     position: relative;
     background-image: url('../img/patterns/2.jpg');
     background-repeat: repeat;
+}
+
+.light-svg {
+    width: 70px;
+    height: 70px;
+    shape-rendering: geometricPrecision;
+
+    stroke: #747474;
+    stroke-width: 1.2;
+    fill: transparent;
 }
