@@ -192,6 +192,8 @@
     font-size: 20px;
     font-weight: 300;
 
+    box-sizing: border-box;
+
     padding: 10px 20px 15px 20px;
 }
 

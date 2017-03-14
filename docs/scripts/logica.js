@@ -9,14 +9,14 @@ var logica = (function () {
             document.querySelector('body').style.overflowY = 'hidden';
             document.querySelector('div.fullscreen-scrollable-wrap').style.display = 'block';
             document.forms.edit.querySelector('.info-bar').innerHTML = (new Date()).prettyFormat() + ' by' +
-            '<span class="link-text">' + authorization.getUser() + '</span>';
+            '<span>' + authorization.getUser() + '</span>';
         });
 
         var resize = function (event){
             event.currentTarget.style.height = event.currentTarget.scrollHeight +'px';
         }
         for (var textarea of document.querySelectorAll('textarea')) {
-            textarea.addEventListener('keydown', resize);
+            textarea.addEventListener('keypress', resize);
         }
 
         document.querySelector('div.fullscreen-scrollable-wrap').addEventListener('click', function (event) {
