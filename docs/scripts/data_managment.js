@@ -235,5 +235,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     console.log(data.add(somepost));
     console.log(dom.clear());
-    console.log(dom.display(data.getMultiple(null, {tags: ['lorem']})));
+    console.log(dom.display(data.getMultiple(null, {all: true})));
 });
