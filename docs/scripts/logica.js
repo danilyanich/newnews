@@ -14,6 +14,9 @@ var logica = (function () {
             document.forms.edit.caption.value = '';
             document.forms.edit.summary.value = '';
             document.forms.edit.content.value = '';
+            document.forms.edit.caption.style.height = '';
+            document.forms.edit.summary.style.height = '';
+            document.forms.edit.content.style.height = '';
             document.forms.edit.tags.value = '';
         }
         document.getElementById('plus').addEventListener('click', openForm);
