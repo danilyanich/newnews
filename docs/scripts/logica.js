@@ -26,8 +26,28 @@ var logica = (function () {
             textarea.addEventListener('keypress', resize);
         }
 
-        // click on wrap / cross button closes the form
+        // saving article
+        var saveArtice = function (event) {
+            var tagsline = document.forms.edit.tags.value;
+            tagsline = tagsline.replace('#', ' ');
+            var article = {
+                id: '' + (new Date()).getTime(),
+                title: document.forms.edit.caption.value,
+                summary: document.forms.edit.summary.value,
+                createdAt: new Date(),
+                author: authorization.getUser(),
+                content: document.forms.edit.content.value,
+                tags: tagsline.split(' ')
+            }
+            if(!dom.add(article)) {
+                alert('article - invalid');
+            } else {
+                document.querySelector('span.form-button.discard').click();
+            }
+        }
+        document.querySelector('span.form-button.add').addEventListener('click', saveArtice);
 
+        // click on wrap / cross button closes the form
         var checkUnsaved = function() {
             return !(document.forms.edit.caption.value === '' &&
                 document.forms.edit.summary.value === '' &&
@@ -36,12 +56,12 @@ var logica = (function () {
         }
 
         var closeForm = function (event) {
-
             var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
             var mwrap = document.querySelector('div.fullscreen-scrollable-wrap div.middle-wrap');
             var cross = document.querySelector('div.fullscreen-scrollable-wrap div.middle-wrap svg.light-svg');
-            if(event.target === fswrap || event.target === mwrap || event.target === cross) {
-                if (checkUnsaved()) alert('unsaved form');
+            var discard = document.querySelector('span.form-button.discard');
+            if(event.target === fswrap || event.target === mwrap || event.target === cross || event.target === discard) {
+                if (checkUnsaved() && event.target !== discard) alert('unsaved form');
                 document.querySelector('body').style.overflowY = 'scroll';
                 fswrap.style.display = 'none';
             }

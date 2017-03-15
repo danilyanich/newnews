@@ -194,7 +194,9 @@ var dom = (function () {
                 makePostHTML(article),
                 handle.firstChild
             );
+            return true;
         }
+        return false;
     }
 
     return {
