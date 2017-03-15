@@ -4,6 +4,9 @@
     width: 100vw;
     height: 100vh;
     background: #000000aa;
+
+    display: flex;
+    align-content: center;
 }
 
 .middle-wrap {
@@ -123,8 +126,6 @@
     flex-flow: row wrap;
     align-content: center;
 
-    background: rgba(46, 46, 46, 0.5);
-
     z-index: -10px;
     padding: 10px;
 }
@@ -150,6 +151,8 @@
 .post img {
     width: 100%;
     height: auto;
+    max-height: 50vh;
+    object-fit: cover;
     display: block;
 }
 
@@ -272,9 +275,17 @@
     padding: 0 20px 0 20px;
 }
 
+.fullscreen-scrollable-wrap .middle-content {
+    margin: auto 0 auto 0;
+}
+
 @media (max-width: 1000px){
     .middle-content {
         width: 100vw;
+    }
+
+    .fullscreen-scrollable-wrap .middle-content {
+        margin-top: 0;
     }
 }
 

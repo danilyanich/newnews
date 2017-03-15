@@ -1,5 +1,6 @@
 'uses strict';
 
+/*
 document.addEventListener('DOMContentLoaded', function(event) {
     var searchBar = document.querySelector('form.search-bar.v-align');
     var pass = document.querySelector('html>body>div.middle-wrap>div.middle-content>div.search-bar-wrap');
@@ -12,4 +13,4 @@ document.addEventListener('DOMContentLoaded', function(event) {
             searchBar.classList.remove('light-shadow');
         }
     });
-});
+});*/

@@ -9,7 +9,7 @@
 }
 
 body {
-    background: #B9B9B9;
+    background: #ffffff ;
 }
 
 .animatable {
@@ -32,8 +32,8 @@ body {
 }
 
 .static-background {
-    height: 100vh;
-    width: 100vw;
+    /*height: 100vh;
+    width: 100vw;*/
     position: relative;
     background-image: url('../img/patterns/2.jpg');
     background-repeat: repeat;

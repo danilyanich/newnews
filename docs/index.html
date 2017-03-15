@@ -12,7 +12,7 @@
 
     <template id="post-template">
     <div class="post-wrap">
-    <div class="post light-shadow">
+    <div class="post">
 
         <img></img>
         <div class="post-caption link-text"></div>
@@ -32,7 +32,7 @@
     <div class="middle-content">
 
         <div class="search-bar-wrap">
-        <div class="search-bar v-align light-shadow" style="position:fixed;">
+        <div class="search-bar v-align">
 
             <span class="search-text">
                 New post
@@ -53,7 +53,7 @@
             <textarea name="caption" class="post-caption" placeholder="Caption"></textarea>
             <div name="info" class="info-bar v-align"></div>
             <textarea name="summary" class="summary" placeholder="Summary"></textarea>
-            <textarea name="content" class="summary" placeholder="Content" style="height: 50vh;"></textarea>
+            <textarea name="content" class="summary" placeholder="Content"></textarea>
             <div class="tags-line v-align">
                 <span style="font-weight:600;padding-right:5px;">#</span>
                 <input name="tags" class="tags" placeholder="Tags"></input>
@@ -69,12 +69,7 @@
     </div></div></div></div>
 
 
-    <div class="top-fixed-wrap" style="z-index: -10;">
-        <div class="static-background"></div>
-    </div>
-
-
-    <div class="middle-wrap">
+    <div class="middle-wrap" style="background:#00111a;">
     <div class="middle-content">
 
         <header class="header v-align">
@@ -86,8 +81,7 @@
                 <!--inline svg-->
                 <span>
                     <svg class="light-svg" style="width:40px;height:40px;stroke:#ffffff;">
-                        <circle cx="20" cy="40" r="19"/>
-                        <circle cx="20" cy="11" r="10"/>
+                        <circle cx="20" cy="20" r="19"/>
                     </svg>
                 </span>
             </div>
@@ -108,6 +102,12 @@
             </div>
         </div>
 
+    </div></div>
+
+
+    <div class="middle-wrap">
+    <div class="middle-content">
+
         <div class="search-bar-wrap">
         <form class="search-bar v-align" name="searchInput">
 
@@ -119,6 +119,12 @@
             </svg>
 
         </form></div>
+
+    </div></div>
+
+
+    <div class="middle-wrap" style="background:#97a2a8;">
+    <div class="middle-content">
 
         <div id="post-placeholder" class="content">
         </div>

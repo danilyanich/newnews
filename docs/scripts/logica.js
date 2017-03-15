@@ -8,7 +8,7 @@ var logica = (function () {
         // plus button opens add form, and sets it's content to default
         var openForm = function (event) {
             document.querySelector('body').style.overflowY = 'hidden';
-            document.querySelector('div.fullscreen-scrollable-wrap').style.display = 'block';
+            document.querySelector('div.fullscreen-scrollable-wrap').style.display = 'flex';
             document.forms.edit.querySelector('.info-bar').innerHTML = (new Date()).prettyFormat() + ' by' +
             '<span>' + authorization.getUser() + '</span>';
             document.forms.edit.caption.value = '';
