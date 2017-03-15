@@ -6,8 +6,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
     window.addEventListener('scroll', function() {
         if (pass.getBoundingClientRect().top < 0) {
             searchBar.classList.add('search-bar-fixed');
+            searchBar.classList.add('light-shadow');
         } else {
             searchBar.classList.remove('search-bar-fixed');
+            searchBar.classList.remove('light-shadow');
         }
     });
 });
