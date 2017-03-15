@@ -164,10 +164,6 @@
     padding: 10px 20px 15px 20px;
 }
 
-.post-caption:first-letter {
-    text-transform: uppercase;
-}
-
 .info-bar {
     background: #EBEBEB;
     color: #747474;
@@ -195,10 +191,6 @@
     box-sizing: border-box;
 
     padding: 10px 20px 15px 20px;
-}
-
-.summary::first-letter{
-    text-transform: uppercase;
 }
 
 .tags-line {
