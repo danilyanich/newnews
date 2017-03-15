@@ -243,7 +243,8 @@
 }
 
 #dragndrop {
-    height: 70px;
+    min-height: 150px;
+    height: auto;
 
     color: #adadad;
     font-family: 'Open Sans', sans-serif;
@@ -257,8 +258,8 @@
     align-items: center;
 }
 
-#dragndrop:hover {
-    height: 200px;
+#dragndrop img {
+    max-height: none;
 }
 
 .form-button {
