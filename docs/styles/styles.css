@@ -3,7 +3,7 @@
     overflow: auto;
     width: 100vw;
     height: 100vh;
-    background: #000000aa;
+    background-color: #000000aa;
 
     display: flex;
     align-content: center;
@@ -243,7 +243,7 @@
 }
 
 #dragndrop {
-    min-height: 150px;
+    min-height: 100px;
     height: auto;
 
     color: #adadad;
@@ -274,6 +274,14 @@
     font-weight: 300;
 
     padding: 0 20px 0 20px;
+}
+
+.form-button.add {
+    color: green;
+}
+
+.form-button.discard {
+    color: red;
 }
 
 .fullscreen-scrollable-wrap .middle-content {

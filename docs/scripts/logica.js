@@ -7,55 +7,6 @@ var logica = (function () {
 
 
 
-        // dragndrop emplementation
-        function allowDrop(event) {
-            event.preventDefault();
-        }
-
-        function drop(event) {
-            event.preventDefault();
-            var path = event.dataTransfer.getData('text');
-            var img = document.createElement('img');
-            img.src = path;
-            event.currentTarget.innerHTML = '';
-            event.currentTarget.appendChild(img);
-        }
-
-        document.getElementById('dragndrop').addEventListener('dragover', allowDrop, false);
-        document.getElementById('dragndrop').addEventListener('drop', drop, false);
-
-
-
-        // plus button opens add form, and sets it's content to default
-        var openForm = function (event) {
-            document.querySelector('body').style.overflowY = 'hidden';
-            document.querySelector('div.fullscreen-scrollable-wrap').style.display = 'flex';
-            document.forms.edit.querySelector('.info-bar').innerHTML = (new Date()).prettyFormat() + ' by' +
-            '<span>' + authorization.getUser() + '</span>';
-            document.forms.edit.caption.value = '';
-            document.forms.edit.summary.value = '';
-            document.forms.edit.content.value = '';
-            document.forms.edit.caption.style.height = '';
-            document.forms.edit.summary.style.height = '';
-            document.forms.edit.content.style.height = '';
-            document.forms.edit.tags.value = '';
-        }
-
-        document.getElementById('plus').addEventListener('click', openForm);
-
-
-
-        // textareas are resizing to fit content
-        var resize = function (event) {
-            event.currentTarget.style.height = event.currentTarget.scrollHeight +'px';
-        }
-
-        for (var textarea of document.querySelectorAll('textarea')) {
-            textarea.addEventListener('keypress', resize);
-        }
-
-
-
         // saving article
         var saveArtice = function (event) {
             var tagsline = document.forms.edit.tags.value;
@@ -78,7 +29,65 @@ var logica = (function () {
             }
         }
 
-        document.querySelector('span.form-button.add').addEventListener('click', saveArtice);
+
+
+        // dragndrop emplementation
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var path = event.dataTransfer.getData('text');
+            var img = document.createElement('img');
+            img.src = path;
+            event.currentTarget.innerHTML = '';
+            event.currentTarget.appendChild(img);
+        }
+
+
+
+        // textareas are resizing to fit content
+        var resize = function (event) {
+            event.currentTarget.style.height = event.currentTarget.scrollHeight +'px';
+        }
+
+
+
+        function linkAddEditFormEvents(form) {
+            form.getElementById('dragndrop').addEventListener('dragover', allowDrop, false);
+            form.getElementById('dragndrop').addEventListener('drop', drop, false);
+            form.querySelector('span.form-button.add').addEventListener('click', saveArtice);
+            for (var textarea of form.querySelectorAll('textarea')) {
+                textarea.addEventListener('keypress', resize);
+            }
+        }
+
+
+        // plus button opens add form, and sets it's content to default
+        var editAddForm = document.getElementById('edit-add-form-template');
+
+        var openForm = function (event) {
+            var copy = editAddForm.content.cloneNode(true);
+            var form = copy.querySelector('form');
+
+            form.querySelector('.info-bar').innerHTML =
+                (new Date()).prettyFormat() + ' by' +
+                '<span>' + authorization.getUser() + '</span>';
+            /*form.caption.value = '';
+            form.summary.value = '';
+            form.content.value = '';
+            form.tags.value = '';*/
+
+
+            document.querySelector('body').style.overflowY = 'hidden';
+            var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
+            fswrap.style.display = 'flex';
+            linkAddEditFormEvents(copy);
+            fswrap.appendChild(copy);
+        }
+
+        document.getElementById('plus').addEventListener('click', openForm);
 
 
 
@@ -99,6 +108,7 @@ var logica = (function () {
                 if (checkUnsaved() && event.target !== discard) alert('unsaved form');
                 document.querySelector('body').style.overflowY = 'scroll';
                 fswrap.style.display = 'none';
+                fswrap.innerHTML = '';
             }
         }
 
