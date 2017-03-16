@@ -8,39 +8,38 @@ Date.prototype.prettyFormat = function () {
 Date.locale = {
     month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 };
-Object.prototype.deepCopy = function () {
+var deepCopy = function (object) {
     var copy = new Object();
-    copy = Object.assign(copy, this);
+    copy = Object.assign(copy, object);
     return copy;
 };
 
 var data = (function () {
 
-    var articles = []
+    var articles = [];
 
-    for(var i = 0; i < 15; i++) {
-        var article = {
-            id: '' + i,
-            image: 'img/' + (i + 1) + '.jpg',
-            title: loremIpsum.generate(5, null, {capital: true, dots: false}),
-            summary: loremIpsum.generate(15 + Math.random()*30),
-            createdAt: loremIpsum.randomDate(new Date(2017,1,0), new Date()),
-            author: loremIpsum.generate(2, null, {dots: false, capital: true}),
-            content: loremIpsum.generate(10 + Math.random()*36),
-            tags: [loremIpsum.generate(1,10), loremIpsum.generate(1, 10),  loremIpsum.generate(1, 10), loremIpsum.generate(1)]
+    var example = [
+        {
+            id: '1489693022074',
+            image: 'image.jpg',
+            title: 'title',
+            summary: 'summary',
+            createdAt: 1489693022074,
+            author: 'danilyanich',
+            content: 'content',
+            tags: ['tag1', 'tag2', 'tag3']
         }
-        articles[i] = article;
-    }
+    ];
 
-    var sortArticles = function (array) {
-        array.sort(function(obj1, obj2){
+    var sortArticles = function (articles) {
+        articles.sort(function(obj1, obj2) {
             return obj1.createdAt - obj2.createdAt;
         });
     }
 
     var getMultiple = function (pages, filter) {
         pages = pages || new Object();
-        pages.offset = pages.offse || 0;
+        pages.offset = pages.offset || 0;
         pages.count =  pages.count || 10;
         var slice = articles.slice();
         if(filter) {
@@ -94,7 +93,7 @@ var data = (function () {
 
     var edit = function (id, obj) {
         var index = getById(id);
-        var article = articles[index].deepCopy();
+        var article = deepCopy(articles[index]);
         if (!article) return false;
         var changed = Object.assign(article, obj);
         if (!isValid(changed) ||
@@ -207,7 +206,7 @@ var dom = (function () {
     };
 })();
 
-document.addEventListener('DOMContentLoaded', function(event) {
+/*document.addEventListener('DOMContentLoaded', function(event) {
     var somepost = {
         id: '100',
         title: 'title',
@@ -238,4 +237,4 @@ document.addEventListener('DOMContentLoaded', function(event) {
     console.log(data.add(somepost));
     console.log(dom.clear());
     console.log(dom.display(data.getMultiple(null, {all: true})));
-});
+});*/

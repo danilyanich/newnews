@@ -11,9 +11,13 @@ var authorization = (function () {
             document.querySelector('header.header.v-align div.v-align .username').innerHTML = user;
             document.getElementById('plus').style.display = 'flex';
         } else {
-            document.querySelector('header.header.v-align div.v-align .username').innerHTML = 'log in';
+            document.querySelector('header.header.v-align div.v-align .username').innerHTML = 'authorize';
             document.getElementById('plus').style.display = 'none';
         }
+    }
+
+    var openAuthorizationForm = function (event) {
+        
     }
 
     var getUser = function () {

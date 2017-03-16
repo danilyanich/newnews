@@ -11,21 +11,24 @@ var logica = (function () {
         var saveArtice = function (event) {
             var tagsline = document.forms.edit.tags.value;
             tagsline = tagsline.replace('#', ' ');
+            var now = new Date();
             var article = {
-                id: '' + (new Date()).getTime(),
+                id: '' + now.getTime(),
                 title: document.forms.edit.caption.value,
                 summary: document.forms.edit.summary.value,
-                createdAt: new Date(),
+                createdAt: now,
                 author: authorization.getUser(),
                 content: document.forms.edit.content.value,
                 tags: tagsline.split(' ')
             }
             var image = document.querySelector('#dragndrop img');
             if (image) article.image = image.src;
-            if (!dom.add(article)) {
-                alert('article - invalid');
-            } else {
+            var result = dom.add(article);
+            if (result) {
+                database.addArticle(article);
                 document.querySelector('span.form-button.discard').click();
+            } else {
+                alert('invalid article');
             }
         }
 
@@ -54,6 +57,7 @@ var logica = (function () {
 
 
 
+        // link all events
         function linkAddEditFormEvents(form) {
             form.getElementById('dragndrop').addEventListener('dragover', allowDrop, false);
             form.getElementById('dragndrop').addEventListener('drop', drop, false);
@@ -62,32 +66,6 @@ var logica = (function () {
                 textarea.addEventListener('keypress', resize);
             }
         }
-
-
-        // plus button opens add form, and sets it's content to default
-        var editAddForm = document.getElementById('edit-add-form-template');
-
-        var openForm = function (event) {
-            var copy = editAddForm.content.cloneNode(true);
-            var form = copy.querySelector('form');
-
-            form.querySelector('.info-bar').innerHTML =
-                (new Date()).prettyFormat() + ' by' +
-                '<span>' + authorization.getUser() + '</span>';
-            /*form.caption.value = '';
-            form.summary.value = '';
-            form.content.value = '';
-            form.tags.value = '';*/
-
-
-            document.querySelector('body').style.overflowY = 'hidden';
-            var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-            fswrap.style.display = 'flex';
-            linkAddEditFormEvents(copy);
-            fswrap.appendChild(copy);
-        }
-
-        document.getElementById('plus').addEventListener('click', openForm);
 
 
 
@@ -109,9 +87,32 @@ var logica = (function () {
                 document.querySelector('body').style.overflowY = 'scroll';
                 fswrap.style.display = 'none';
                 fswrap.innerHTML = '';
+
+                document.querySelector('div.fullscreen-scrollable-wrap').removeEventListener('click', closeForm);
             }
         }
 
-        document.querySelector('div.fullscreen-scrollable-wrap').addEventListener('click', closeForm);
+
+
+        // plus button opens add form, and sets it's content to default
+        var editAddForm = document.getElementById('edit-add-form-template');
+
+        var openForm = function (event) {
+            var copy = editAddForm.content.cloneNode(true);
+            var form = copy.querySelector('form');
+
+            form.querySelector('.info-bar').innerHTML =
+                (new Date()).prettyFormat() + ' by' +
+                '<span>' + authorization.getUser() + '</span>';
+
+            document.querySelector('body').style.overflowY = 'hidden';
+            var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
+            fswrap.style.display = 'flex';
+            fswrap.addEventListener('click', closeForm);
+            linkAddEditFormEvents(copy);
+            fswrap.appendChild(copy);
+        }
+
+        document.getElementById('plus').addEventListener('click', openForm);
     });
 })();
