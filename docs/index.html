@@ -70,6 +70,31 @@
 
     <div class="top-fixed-wrap" style="z-index: 20;">
     <div class="fullscreen-scrollable-wrap" style="display: none;">
+
+        <form class="light-shadow" style="
+            color: #747474;
+            background-color: white;
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            margin: auto;
+        ">
+            <div class="logo" style="
+                color: #747474;
+                font-size: 50px;
+                margin: 40px 0 40px 0;
+            "><span>new</span>news</div>
+            <input class="search-text" type="text" name="login" placeholder="Login"></input>
+            <input class="search-text" type="text" name="password" placeholder="Password"></input>
+            <div style="
+                font-family: 'Open Sans', sans-serif;
+                font-size: 30px;
+                font-weight: 100;
+                margin-bottom: 40px;
+                word-wrap: wrap;
+                margin: 20px;
+            ">Authorize</div>
+        </form>
+
     </div></div>
 
 
@@ -142,9 +167,21 @@
 
 
     <div id="scripts">
+        <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyBepwZrFrgNHAB70rtC3MzXg5LWkR5oZ0I",
+                authDomain: "newnews-80fb9.firebaseapp.com",
+                databaseURL: "https://newnews-80fb9.firebaseio.com",
+                storageBucket: "newnews-80fb9.appspot.com",
+                messagingSenderId: "448130359124"
+            };
+            firebase.initializeApp(config);
+        </script>
         <script type="text/javascript" src="scripts/sticky_search.js"></script>
         <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
         <script type="text/javascript" src="scripts/data_managment.js"></script>
+        <script type="text/javascript" src="scripts/firebase.js"></script>
         <script type="text/javascript" src="scripts/authorization.js"></script>
         <script type="text/javascript" src="scripts/logica.js"></script>
     </div>
