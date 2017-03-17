@@ -16,26 +16,22 @@ var authorization = (function () {
         }
     }
 
-    var openAuthorizationForm = function (event) {
-        
-    }
-
     var getUser = function () {
         return user.toString();
     }
 
+    var isAuthorized = function () {
+        return user !== null;
+    }
+
     document.addEventListener('DOMContentLoaded', function(event) {
-        document.querySelector('header.header.v-align div.v-align')
-            .addEventListener('click', function(event){
-                alert('authorize dankr');
-                changeUser('dankr');
-            });
         authorize();
     });
 
     return {
         authorize: authorize,
         changeUser: changeUser,
-        getUser: getUser
+        getUser: getUser,
+        isAuthorized: isAuthorized
     }
 })();

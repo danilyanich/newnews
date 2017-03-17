@@ -2,13 +2,13 @@ var database = (function () {
     // initialize database
     document.addEventListener('DOMContentLoaded', function (event) {
         firebase.database().ref('/posts/').once('value').then(function (snapshot) {
+            dom.clear();
             var articles = snapshot.val();
-            for(var index in articles) {
+                for(var index in articles) {
                 articles[index].createdAt = new Date(parseInt(articles[index].createdAt));
                 articles[index].id = index;
-                data.add(articles[index]);
+                dom.add(articles[index]);
             }
-            dom.display(data.getMultiple(null, {all: true}));
         })
     })
 
