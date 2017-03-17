@@ -49,7 +49,7 @@ body {
     color: black;
 }
 
-textarea, input {
+textarea, input, button {
    border: none;
    outline: none;
    resize: none;

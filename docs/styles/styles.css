@@ -289,6 +289,39 @@
     margin: auto 0 auto 0;
 }
 
+.login-form {
+    color: #747474;
+    background-color: white;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    margin: auto;
+
+}
+
+.login-form > input {
+    text-align: center;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.login-form > input::-webkit-input-placeholder {
+    text-align: center;
+}
+
+.login-form > button {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: 100;
+    margin: 20px 0 40px 0;
+    color: green;
+}
+
+.login-newnews {
+    color: #747474;
+    font-size: 50px;
+    margin: 40px 0 40px 0;
+}
+
 @media (max-width: 1000px){
     .middle-content {
         width: 100vw;
@@ -304,6 +337,7 @@
         width: 100%;
         padding: 20px 0 20px 0;
     }
+
     .content {
         padding: 20px 0 20px 0;
     }
@@ -314,6 +348,10 @@
 
     .mega-logo div {
         font-size: 40px;
+    }
+
+    #dragndrop {
+        display: none;
     }
 }
 
