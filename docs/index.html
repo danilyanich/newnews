@@ -33,7 +33,7 @@
     <div class="middle-content light-shadow">
 
         <div class="search-bar-wrap">
-        <div class="search-bar v-align">
+        <div class="search-bar v-align" style="position:fixed;">
 
             <span class="search-text">
                 New post
@@ -53,8 +53,8 @@
 
             <textarea name="caption" class="post-caption" placeholder="Caption"></textarea>
             <div name="info" class="info-bar v-align"></div>
-            <textarea name="summary" class="summary" placeholder="Summary"></textarea>
-            <textarea name="content" class="summary" placeholder="Content"></textarea>
+            <textarea name="summary" class="summary" placeholder="Summary" style="height:70px;"></textarea>
+            <textarea name="content" class="summary edit-content" placeholder="Content"></textarea>
             <div class="tags-line v-align">
                 <span style="font-weight:600;padding-right:5px;">#</span>
                 <input name="tags" class="tags" placeholder="Tags"></input>
@@ -62,10 +62,12 @@
 
         </form>
 
-        <div class="search-bar">
+        <div class="search-bar-wrap">
+        <div class="search-bar" style="position:fixed;">
             <span class="form-button discard">Discard</span>
             <span class="form-button add">Add</span>
         </div>
+        <div>
 
     </div></div></template>
 
@@ -140,7 +142,7 @@
     </div></div>
 
 
-    <div class="middle-wrap" style="background:#97a2a8;">
+    <div class="middle-wrap light-shadow" style="background:#97a2a8;">
     <div class="middle-content">
 
         <div id="post-placeholder" class="content">
@@ -150,8 +152,13 @@
 
     </div></div>
 
+    <div style="height: 150px;"><div class="footer v-align">
 
-    <div class="footer v-align">by danilyanich</div>
+        <div class="author-name">Крачковский Даниил</div>
+        <div class="detailed-descc">8 group 2к17 year</div>
+        <a href="https://github.com/danilyanich">github</a>
+
+    </div></div>
 
 
     <div id="scripts">
