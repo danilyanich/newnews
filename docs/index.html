@@ -30,10 +30,10 @@
 
     <template id="edit-add-form-template">
     <div class="middle-wrap">
-    <div class="middle-content light-shadow">
+    <div class="middle-content light-shadow" style="background:white;">
 
         <div class="search-bar-wrap">
-        <div class="search-bar v-align" style="position:fixed;">
+        <div class="search-bar v-align">
 
             <span class="search-text">
                 New post
@@ -63,7 +63,7 @@
         </form>
 
         <div class="search-bar-wrap">
-        <div class="search-bar" style="position:fixed;">
+        <div class="search-bar">
             <span class="form-button discard">Discard</span>
             <span class="form-button add">Add</span>
         </div>
@@ -83,7 +83,8 @@
     </form></template>
 
 
-    <div class="top-fixed-wrap" style="z-index: 20;">
+    <div class="top-fixed-wrap" style="z-index: 20;
+        -webkit-transform: translateZ(0);">
     <div class="fullscreen-scrollable-wrap" style="display: none;">
     </div></div>
 
@@ -142,7 +143,7 @@
     </div></div>
 
 
-    <div class="middle-wrap light-shadow" style="background:#97a2a8;">
+    <div class="middle-wrap" style="background:#97a2a8;">
     <div class="middle-content">
 
         <div id="post-placeholder" class="content">

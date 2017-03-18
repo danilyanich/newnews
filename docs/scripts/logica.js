@@ -3,17 +3,45 @@ var logica = (function () {
 
     HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 
+    var fade = [
+        { opacity: '0.0' },
+        { opacity: '1.0' }
+    ];
+
+    var slide = [
+        { transform: 'translateY(25px) scale(0.9)' },
+        { transform: 'translateY(0px) scale(1)' }
+    ];
+
+    var timing = {
+        normal: {
+            duration: 200,
+            direction: 'normal',
+            easing: 'ease-out'
+        },
+        reverse: {
+            duration: 200,
+            direction: 'reverse',
+            easing: 'ease-in'
+        }
+    };
+
     var openFullscreenWrap = function () {
         document.querySelector('body').style.overflowY = 'hidden';
         var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
         fswrap.style.display = 'flex';
+        fswrap.animate(fade, timing.normal);
         return fswrap;
     }
 
-    var closeFullscreenWrap = function(fswrap) {
+    var closeFullscreenWrap = function(fswrap, callback) {
         document.querySelector('body').style.overflowY = 'scroll';
-        fswrap.style.display = 'none';
-        fswrap.innerHTML = '';
+        fswrap.animate(fade, timing.reverse);
+        fswrap.firstElementChild.animate(slide, timing.reverse)
+            .onfinish = function () {
+                fswrap.style.display = 'none';
+                fswrap.innerHTML = '';
+            };
     }
 
     var closeFullscreenWrapEvent = function (event) {
@@ -21,6 +49,7 @@ var logica = (function () {
         var mwrap = document.querySelector('div.fullscreen-scrollable-wrap div.middle-wrap');
 
         if(event.target === fswrap || event.target === mwrap) {
+            event.preventDefault();
             closeFullscreenWrap(fswrap);
         }
     }
@@ -93,7 +122,7 @@ var logica = (function () {
         var closeAddEditForm = function (event) {
             var cross = document.querySelector('div.fullscreen-scrollable-wrap div.middle-wrap svg.light-svg');
             var discard = document.querySelector('span.form-button.discard');
-            if(event.target === cross || event.target === discard || event.target.contains(cross)) {
+            if(event.target === cross || event.target === discard || event.target.parentNode === cross) {
                 if (checkUnsaved() && event.target !== discard) alert('unsaved form');
                 var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
                 fswrap.removeEventListener('click', closeAddEditForm);
@@ -115,6 +144,7 @@ var logica = (function () {
             fswrap.addEventListener('click', closeAddEditForm);
             linkAddEditFormEvents(copy);
             fswrap.appendChild(copy);
+            fswrap.firstElementChild.animate(slide, timing.normal);
         }
 
         // link all events
@@ -177,6 +207,7 @@ var logica = (function () {
                 fswrap.addEventListener('click', closeAuthorizationForm);
                 linkEvents(copy);
                 fswrap.appendChild(copy);
+                fswrap.firstElementChild.animate(slide, timing.normal);
             }
         }
 

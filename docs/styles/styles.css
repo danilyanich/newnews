@@ -365,7 +365,7 @@
 }
 
 .edit-content {
-    height: calc(100vh - 550px + 70px);
+    height: 150px;
 }
 
 @media (max-width: 1000px){
