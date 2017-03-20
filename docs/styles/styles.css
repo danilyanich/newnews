@@ -148,6 +148,9 @@
     background: #ffffff;
     overflow: hidden;
 
+}
+
+:not(form).post {
     animation: post-appear 0.5s;
 }
 

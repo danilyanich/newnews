@@ -7,14 +7,15 @@ var database = (function () {
                 articles[index].createdAt = new Date(parseInt(articles[index].createdAt));
                 articles[index].id = index;
                 data.add(articles[index]);
-                dom.add(articles[index]);
             }
+            dom.display(data.getMultiple({offset: 0, count: 6}));
 
             var pass = document.querySelector('#post-placeholder').firstElementChild;
             var niceReveal = function (event) {
-                if (pass && pass.getBoundingClientRect().bottom < window.innerHeight + 100) {
+                if (pass.getBoundingClientRect().bottom < window.innerHeight + 100) {
                     pass.firstElementChild.style.display = 'block';
-                    pass = pass.nextElementSibling || pass;
+                    if (pass.nextElementSibling && pass.nextElementSibling.classList.contains('post-wrap'))
+                        pass = pass.nextElementSibling;
                 }
             }
             niceReveal();
