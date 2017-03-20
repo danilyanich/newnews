@@ -8,6 +8,10 @@
     cursor: default;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     background: #ffffff;
 }

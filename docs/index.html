@@ -8,13 +8,13 @@
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
-
+    <script type="text/javascript" src="scripts/firebase.js"></script>
 </head>
 <body>
 
     <template id="post-template">
     <div class="post-wrap">
-    <div class="post light-shadow">
+    <div class="post light-shadow" style="display:none;">
 
         <img></img>
         <div class="post-caption link-text"></div>
@@ -143,7 +143,7 @@
     </div></div>
 
 
-    <div class="middle-wrap" style="background:#97a2a8;">
+    <div class="middle-wrap" style="background:#97a2a8;min-height: calc(100vh - 370px);">
     <div class="middle-content">
 
         <div id="post-placeholder" class="content">
@@ -177,7 +177,6 @@
         <script type="text/javascript" src="scripts/sticky_search.js"></script>
         <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
         <script type="text/javascript" src="scripts/data_managment.js"></script>
-        <script type="text/javascript" src="scripts/firebase.js"></script>
         <script type="text/javascript" src="scripts/authorization.js"></script>
         <script type="text/javascript" src="scripts/logica.js"></script>
     </div>

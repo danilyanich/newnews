@@ -21,19 +21,41 @@ var data = (function () {
     var example = [
         {
             id: '1489693022074',
-            image: 'image.jpg',
+            image: '/home/danilyanich/Pictures/Плюхи/9d2af8140f1d9dd93a9c7b134aaf8bd5.jpg',
             title: 'title',
             summary: 'summary',
-            createdAt: 1489693022074,
+            createdAt: new Date(1489693022074),
+            author: 'danilyanich',
+            content: 'content',
+            tags: ['tag1', 'tag2', 'tag3']
+        },{
+            id: '1489693022074',
+            image: '/home/danilyanich/Pictures/Плюхи/tumblr_mvs201ekjt1r46py4o1_1280.jpg',
+            title: 'title',
+            summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            createdAt: new Date(),
+            author: 'danilyanich',
+            content: 'content',
+            tags: ['tag1', 'tag2', 'tag3']
+        },{
+            id: '1489693022074',
+            image: '/home/danilyanich/Pictures/Плюхи/original.jpg',
+            title: 'title',
+            summary: 'summary',
+            createdAt: new Date(),
             author: 'danilyanich',
             content: 'content',
             tags: ['tag1', 'tag2', 'tag3']
         }
     ];
 
+    var addExample = function () {
+        articles = example;
+    }
+
     var sortArticles = function (articles) {
         articles.sort(function(obj1, obj2) {
-            return obj1.createdAt - obj2.createdAt;
+            return obj2.createdAt - obj1.createdAt;
         });
     }
 
@@ -88,6 +110,7 @@ var data = (function () {
     var add = function (obj) {
         if (!isValid(obj)) return false;
         articles.push(obj);
+        sortArticles(articles);
         return true;
     }
 
@@ -116,6 +139,10 @@ var data = (function () {
         return articles[index];
     }
 
+    var size = function () {
+        return articles.length;
+    }
+
     var refresh = function () {
         handle.innerHTML = '';
         for (var i = 0; i < articles.length; i++) {
@@ -132,7 +159,9 @@ var data = (function () {
         add: add,
         edit: edit,
         remove: remove,
-        refresh: refresh
+        refresh: refresh,
+        example: addExample,
+        size: size
     };
 })();
 
@@ -180,19 +209,22 @@ var dom = (function () {
     var display = function(articles) {
         clear();
         for (article of articles) {
-            handle.insertBefore(
-                makePostHTML(article),
-                handle.firstChild
+            handle.appendChild(
+                makePostHTML(article)
             );
         }
     }
 
-    var add = function (article) {
-        if (data.add(article)) {
-            handle.insertBefore(
-                makePostHTML(article),
-                handle.firstChild
-            );
+    var add = function (article, way) {
+        if (data.isValid(article)) {
+            if (way && way === 'append'){
+                handle.appendChild(makePostHTML(article));
+            } else {
+                handle.insertBefore(
+                    makePostHTML(article),
+                    handle.firstChild
+                );
+            }
             return true;
         }
         return false;
@@ -205,36 +237,3 @@ var dom = (function () {
         add: add
     };
 })();
-
-/*document.addEventListener('DOMContentLoaded', function(event) {
-    var somepost = {
-        id: '100',
-        title: 'title',
-        summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        author: 'dan kr',
-        content: 'olololollollolollo',
-        tags: ['kek', 'lol']
-    }
-    var otherpost = {
-        title: 'new title',
-        createdAt: new Date(),
-        author: 'dan kr',
-        content: 'Ooops!',
-        tags: ['kek', 'lol', 'foo', 'bar']
-    }
-    console.log(data.getMultiple());
-    console.log(data.getMultiple(null, {tags: ['lorem', 'ipsum', 'dolor', 'sit', 'amet']}));
-    console.log(data.getMultiple({offset: 2, count: 5}));
-    console.log(data.add(somepost));
-    console.log(data.getMultiple(null, {tags: ['kek']}));
-    console.log(data.edit('100', otherpost));
-    console.log(data.getMultiple(null, {author: 'dan kr'}));
-    console.log(data.remove('100'));
-    console.log(data.getMultiple(null, {author: 'dan kr'}));
-    console.log(data.getMultiple(null, null));
-
-    console.log(data.add(somepost));
-    console.log(dom.clear());
-    console.log(dom.display(data.getMultiple(null, {all: true})));
-});*/
