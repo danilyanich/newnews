@@ -217,6 +217,19 @@ var logica = (function () {
 
     })();
 
+    var pass = document.querySelector('#post-placeholder').firstElementChild;
+    var niceReveal = function (event) {
+        if(!pass) pass = document.querySelector('#post-placeholder').firstElementChild;
+        else {
+            if (pass.getBoundingClientRect().bottom < window.innerHeight) {
+                pass.firstElementChild.style.display = 'block';
+                if (pass.nextElementSibling && pass.nextElementSibling.classList.contains('post-wrap'))
+                    pass = pass.nextElementSibling;
+            }
+        }
+    }
+    window.addEventListener('scroll', niceReveal);
+
     document.addEventListener('DOMContentLoaded', function (event) {
         // link events
         document.querySelector('div.fullscreen-scrollable-wrap').addEventListener('click', closeFullscreenWrapEvent);
