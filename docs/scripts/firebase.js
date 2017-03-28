@@ -8,24 +8,11 @@ var database = (function () {
                 articles[index].id = index;
                 data.add(articles[index]);
             }
-            dom.display(data.getMultiple({offset: 0, count: 6}));
-
-            var pass = document.querySelector('#post-placeholder').firstElementChild;
-            var niceReveal = function (event) {
-                if (pass.getBoundingClientRect().bottom < window.innerHeight + 100) {
-                    pass.firstElementChild.style.display = 'block';
-                    if (pass.nextElementSibling && pass.nextElementSibling.classList.contains('post-wrap'))
-                        pass = pass.nextElementSibling;
-                }
-            }
-            niceReveal();
-
-            window.addEventListener('scroll', niceReveal);
         });
     });
 
     var addArticle = function (post) {
-        var copy = deepCopy(post);
+        var copy = Object.deepCopy(post);
         delete copy.id;
         copy.createdAt = copy.createdAt.getTime();
         firebase.database().ref('/posts/' + post.id).set(copy);
