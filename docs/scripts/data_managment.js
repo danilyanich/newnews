@@ -2,13 +2,16 @@
 Date.prototype.getMonthName = function() {
     return Date.locale.month_names[this.getMonth()];
 };
+
 Date.prototype.prettyFormat = function () {
     return this.getDate() + ' ' + this.getMonthName().toUpperCase() + ' ' + this.getHours() + ':' + this.getMinutes();
 };
+
 Date.locale = {
     month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 };
-var deepCopy = function (object) {
+
+Object.deepCopy = function (object) {
     var copy = new Object();
     copy = Object.assign(copy, object);
     return copy;
@@ -32,7 +35,7 @@ var data = (function () {
             id: '1489693022074',
             image: '/home/danilyanich/Pictures/Плюхи/tumblr_mvs201ekjt1r46py4o1_1280.jpg',
             title: 'title',
-            summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            summary: 'Lorem ipsum dolor sit amet var sortArticles = function (articles) { articles.sort(function(obj1, obj2) {return obj2.createdAt - obj1.createdAt; }',
             createdAt: new Date(),
             author: 'danilyanich',
             content: 'content',
@@ -49,6 +52,20 @@ var data = (function () {
         }
     ];
 
+    for (var i = 0; i < 11; i++) {
+        var date = loremIpsum.randomDate(new Date('2016-01-01'), new Date());
+        example.push({
+            id: '' + date.getTime(),
+            image: '/home/danilyanich/Pictures/Плюхи/original.jpg',
+            title:  '' + i + ' ' + loremIpsum.generate(3),
+            summary: loremIpsum.generate(10),
+            createdAt: date,
+            author: 'danilyanich',
+            content: loremIpsum.generate(200),
+            tags: [loremIpsum.generate(1, 20), loremIpsum.generate(1, 20), loremIpsum.generate(1, 20)]
+        })
+    }
+
     var addExample = function () {
         articles = example;
     }
@@ -63,9 +80,12 @@ var data = (function () {
         pages = pages || new Object();
         pages.offset = pages.offset || 0;
         pages.count =  pages.count || 10;
+        if (pages.all) {
+            pages.offset = 0;
+            pages.count = articles.length;
+        }
         var slice = articles.slice();
-        if(filter) {
-            if(filter.all) pages.count = articles.length;
+        if (filter) {
             if (filter.author) {
                 slice = slice.filter(function (article) {
                     return article.author === filter.author;
@@ -97,14 +117,21 @@ var data = (function () {
         })
     }
 
+    var validator = {
+        id: x => x && typeof(x) === 'string',
+        title: x => x && typeof(x) === 'string' && x.length < 100,
+        summary: x => x && typeof(x) === 'string' && x.length < 200,
+        createdAt: x => x && x instanceof Date && x != 'Invalid date',
+        author: x => x && typeof(x) === 'string',
+        content: x => x && typeof(x) === 'string',
+    }
+
     var isValid = function (obj) {
-        result = obj.id && typeof(obj.id) ===  'string';
-        result = result && obj.title && typeof(obj.title) ===  'string' && obj.title.length < 100;
-        result = result && obj.summary && typeof(obj.summary) ===  'string' && obj.title.length < 200;
-        result = result && obj.createdAt && obj.createdAt instanceof Date;
-        result = result && obj.author && typeof(obj.author) ===  'string';
-        result = result && obj.content && typeof(obj.content) ===  'string';
-        return result;
+        if (!obj) return false;
+        for (check in validator)
+            if (!validator[check](obj[check]))
+                return false;
+        return true;
     }
 
     var add = function (obj) {
