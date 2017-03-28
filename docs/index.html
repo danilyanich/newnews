@@ -83,8 +83,45 @@
     </form></template>
 
 
-    <div class="top-fixed-wrap" style="z-index: 20;
-        -webkit-transform: translateZ(0);">
+    <template id="detailed-form-template">
+    <div class="middle-wrap">
+    <div class="middle-content light-shadow" style="background:white;">
+
+        <div class="search-bar-wrap">
+        <div class="search-bar v-align">
+
+            <span class="search-text">
+                Post
+            </span>
+            <svg class="light-svg">
+                <line x1="20" y1="20" x2="50" y2="50"/>
+                <line x1="50" y1="20" x2="20" y2="50"/>
+            </svg>
+
+        </div></div>
+
+        <div style="overflow-Y: hidden;">
+        <img class="appearing-image"></img>
+        <div class="post-caption link-text"></div>
+        <div class="info-bar v-align"></div>
+        <div class="summary"></div>
+        <div class="summary post-content"></div>
+        <div class="tags-line v-align">
+            <span style="font-weight:600;padding-right:5px;" class="link-text">#</span>
+            <span class="tags"></span>
+        </div></div>
+
+        <div class="search-bar-wrap">
+        <div class="search-bar">
+            <span class="form-button discard">Delete</span>
+            <span class="form-button add">Edit</span>
+            <span class="form-button">Close</span>
+        </div>
+        <div>
+
+    </div></div></template>
+
+    <div class="top-fixed-wrap" style="z-index: 20;">
     <div class="fullscreen-scrollable-wrap" style="display: none;">
     </div></div>
 
@@ -125,7 +162,7 @@
     </div></div>
 
 
-    <div class="middle-wrap">
+    <div class="middle-wrap strong-shadow">
     <div class="middle-content">
 
         <div class="search-bar-wrap">
@@ -133,10 +170,12 @@
 
             <input name="search" placeholder="Search..." class="search-text"></input>
             <!--inline svg-->
+            <button type="submit" class="search-button">
             <svg class="light-svg">
                 <line x1="20" y1="50" x2="33.5" y2="36.5"/>
                 <circle cx="40" cy="30" r="10"/>
             </svg>
+            </button>
 
         </form></div>
 
@@ -174,11 +213,18 @@
             };
             firebase.initializeApp(config);
         </script>
-        <script type="text/javascript" src="scripts/sticky_search.js"></script>
+        <script type="text/javascript" src="scripts/pagination.js"></script>
         <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
         <script type="text/javascript" src="scripts/data_managment.js"></script>
         <script type="text/javascript" src="scripts/authorization.js"></script>
         <script type="text/javascript" src="scripts/logica.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function (event) {
+                //data.example();
+                authorization.changeUser('danilyanich');
+                pagination.applyFilter(null);
+            });
+        </script>
     </div>
 </body>
 </html>

@@ -120,6 +120,10 @@
     color: #747474;
  }
 
+.search-button {
+    width: auto;
+}
+
 .content {
     display: flex;
     align-items: flex-start;
@@ -382,6 +386,11 @@
 
 .edit-content {
     height: 150px;
+}
+
+.appearing-image {
+    width: 100%;
+    transform-origin: top;
 }
 
 @media (max-width: 1000px){
