@@ -1,5 +1,2 @@
-*.iml
 .DS_Store/
-.idea/
-out/
-task1/
+node_modules/
