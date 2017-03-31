@@ -1,0 +1,30 @@
+{
+  "name": "newnews",
+  "version": "1.0.0",
+  "description": "Ispiration database",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danilyanich/newnews.git"
+  },
+  "keywords": [
+    "newnews",
+    "news",
+    "inspiration"
+  ],
+  "author": "Dan Krachkouski <danilyanich@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danilyanich/newnews/issues"
+  },
+  "homepage": "https://github.com/danilyanich/newnews#readme",
+  "dependencies": {
+    "http": "0.0.0"
+  }
+}
