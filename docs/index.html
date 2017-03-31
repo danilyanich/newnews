@@ -1,217 +1,105 @@
-<!DOCTYPE html>
+<!doctype HTML>
 <html>
 <head>
+
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Roboto+Condensed:700|Roboto+Slab:100,300"
-        rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700|Roboto:100,300,400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+
+    <link href="styles/main.css" rel="stylesheet" type="text/css">
+    <link href="styles/material.css" rel="stylesheet" type="text/css">
+    <link href="styles/styles.css" rel="stylesheet" type="text/css">
+
+
 </head>
 <body>
 
-    <template id="post-template">
-    <div class="post-wrap">
-    <div class="post strong-shadow" style="display:none;">
 
-        <img></img>
-        <div class="post-caption link-text"></div>
-        <div class="info-bar v-align"></div>
-        <div class="summary"></div>
-        <div class="tags-line v-align">
-            <span style="font-weight:600;padding-right:5px;" class="link-text">#</span>
-            <span class="tags"></span>
+    <template id="post">
+    <div class="wrap post">
+    <div class="card ripple">
+
+        <div class="title-wrap">
+            <img src="https://pp.userapi.com/c837735/v837735014/307f0/vi8zjxpAUnM.jpg"></img>
+            <div class="roboto title light"></div>
+        </div>
+        <div class="wrap">
+            <div class="roboto body-1 dark summary"></div>
+            <div class="roboto body-1 gray tags"></div>
+            <div class="wrap buttons-wrap">
+                <div class="roboto gray button show-full line ripple centered overflow">show full</div>
+            </div>
         </div>
 
     </div></div></template>
 
 
-    <template id="edit-add-form-template">
-    <div class="middle-wrap">
-    <div class="middle-content light-shadow" style="background:white;">
+    <div class="intro">
+    <div class="bar wrap">
 
-        <div class="search-bar-wrap">
-        <div class="search-bar v-align">
-
-            <span class="search-text">
-                New post
-            </span>
-            <svg class="light-svg">
-                <line x1="20" y1="20" x2="50" y2="50"/>
-                <line x1="50" y1="20" x2="20" y2="50"/>
-            </svg>
-
-        </div></div>
-
-        <form name="edit" class="post" onsubmit="return false;">
-
-            <div name="dragndrop" id="dragndrop" class="animatable">
-                Drop your image here
-            </div>
-
-            <textarea name="caption" class="post-caption" placeholder="Caption" style="height:90px;"></textarea>
-            <div name="info" class="info-bar v-align"></div>
-            <textarea name="summary" class="summary" placeholder="Summary" style="height:70px;"></textarea>
-            <textarea name="content" class="summary edit-content" placeholder="Content"></textarea>
-            <div class="tags-line v-align">
-                <span style="font-weight:600;padding-right:5px;">#</span>
-                <input name="tags" class="tags" placeholder="Tags"></input>
-            </div>
-
-        </form>
-
-        <div class="search-bar-wrap">
-        <div class="search-bar">
-            <span class="form-button discard">Discard</span>
-            <span class="form-button add">Add</span>
+        <!-- menu -->
+        <div class="button no-scope menu ripple overflow centered">
+            <i class="material-icons md-light md-24">menu</i>
         </div>
-        <div>
 
-    </div></div></template>
-
-
-    <template id="authorization-form-template">
-    <form class="light-shadow login-form" onsubmit="return false;">
-
-        <div class="logo login-newnews"><span>new</span>news</div>
-        <input class="search-text" type="text" name="login" placeholder="Login"></input>
-        <input class="search-text" type="password" name="password" placeholder="Password"></input>
-        <button>Authorize</button>
-
-    </form></template>
-
-
-    <template id="detailed-form-template">
-    <div class="middle-wrap">
-    <div class="middle-content light-shadow" style="background:white;">
-
-        <div class="search-bar-wrap">
-        <div class="search-bar v-align">
-
-            <span class="search-text">
-                Post
-            </span>
-            <svg class="light-svg">
-                <line x1="20" y1="20" x2="50" y2="50"/>
-                <line x1="50" y1="20" x2="20" y2="50"/>
-            </svg>
-
-        </div></div>
-
-        <div style="overflow-Y: hidden;">
-        <img class="appearing-image"></img>
-        <div class="post-caption link-text"></div>
-        <div class="info-bar v-align"></div>
-        <div class="summary"></div>
-        <div class="summary post-content"></div>
-        <div class="tags-line v-align">
-            <span style="font-weight:600;padding-right:5px;" class="link-text">#</span>
-            <span class="tags"></span>
-        </div></div>
-
-        <div class="search-bar-wrap">
-        <div class="search-bar">
-            <span class="form-button discard">Delete</span>
-            <span class="form-button add">Edit</span>
-            <span class="form-button">Close</span>
+        <!-- newnews logo -->
+        <div class="bar logo centered">
+            <span class="roboto headline">Newnews</span>
         </div>
-        <div>
 
-    </div></div></template>
+        <!-- right side buttons -->
+        <div class="wrap refresh-more">
 
-    <div class="top-fixed-wrap" style="z-index: 20;">
-    <div class="fullscreen-scrollable-wrap" style="display: none;">
-    </div></div>
-
-
-    <div class="middle-wrap" style="background:#00111a;">
-    <div class="middle-content">
-
-        <header class="header v-align">
-            <span class="logo"
-                style="padding-bottom: 9px;">
-                <span>new</span>news</span>
-            <div class="v-align">
-                <div class="username">authorize</div>
-                <!--inline svg-->
-                <span>
-                    <svg class="light-svg" style="width:40px;height:40px;stroke:#ffffff;">
-                        <circle cx="20" cy="20" r="19"/>
-                    </svg>
-                </span>
+            <div class="button no-scope refresh ripple overflow centered">
+                <i class="material-icons md-light md-24">refresh</i>
             </div>
-        </header>
 
-        <div class="intro-wrap v-align">
-            <div class="mega-logo v-align">
-                <div><div>YOUR</div>
-                <div class="mega-logo-mega-text">INSPIRATION</div>
-            </div></div>
-            <div id="plus" class="v-align username">
-                <span>ADD<br/>POST</span>
-                <svg class="light-svg">
-                    <line x1="35" y1="10" x2="35" y2="60"/>
-                    <line x1="10" y1="35" x2="60" y2="35"/>
-                    <circle cx="35" cy="35" r="35"/>
-                </svg>
+            <div class="button no-scope more ripple overflow centered">
+                <i class="material-icons md-light md-24">more_vert</i>
             </div>
+
         </div>
 
     </div></div>
 
 
-    <div class="middle-wrap strong-shadow">
-    <div class="middle-content">
+    <!-- floating plus -->
+    <span id="plus" class="button circle big ripple centered">
+        <i class="material-icons md-light md-24 centered">add</i>
+    </span>
 
-        <div class="search-bar-wrap">
-        <form class="search-bar v-align" name="searchInput">
 
-            <input name="search" placeholder="Search..." class="search-text"></input>
-            <!--inline svg-->
-            <button type="submit" class="search-button">
-            <svg class="light-svg">
-                <line x1="20" y1="50" x2="33.5" y2="36.5"/>
-                <circle cx="40" cy="30" r="10"/>
-            </svg>
-            </button>
+    <!-- floating plus -->
+    <div class="wrap overflow">
+
+        <div class="bar wrap">
+            <span class="headline roboto" style="
+                display: inline-flex;
+                height: 100%;
+                align-items: center;
+                font-weight: 100;
+                font-size: 36px;
+                padding-left: var(--line-margin);
+            ">Your inspiration</span>
+        </div>
+
+        <div class="bar wrap">
+        <form class="search card ripple" name="search">
+
+            <input class="bar inner roboto subheading gray" placeholder="Search" name="field"></input>
+            <span class="block ripple overflow centered">
+                <i class="material-icons md-dark md-24 self centered">search</i>
+            </span>
 
         </form></div>
 
-    </div></div>
+        <div id="post-placeholder" class="wrap inner"></div>
 
-
-    <div class="middle-wrap" style="background:#97a2a8;min-height: calc(100vh - 370px);">
-    <div class="middle-content">
-
-        <div id="post-placeholder" class="content">
-        </div>
-
-        <div class="show-more v-align">show more</div>
-
-    </div></div>
-
-    <div style="height: 150px;"><div class="footer v-align">
-
-        <div class="author-name">Крачковский Даниил</div>
-        <div class="detailed-descc">8 group 2к17 year</div>
-        <a href="https://github.com/danilyanich">github</a>
-
-    </div></div>
-
-
-    <div id="scripts">
-        <script type="text/javascript" src="scripts/pagination.js"></script>
-        <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
-        <script type="text/javascript" src="scripts/database.js"></script>
-        <script type="text/javascript" src="scripts/authorization.js"></script>
-        <script type="text/javascript" src="scripts/logica.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function (event) {
-                data.example();
-                authorization.changeUser('danilyanich');
-                pagination.applyFilter(null);
-            });
-        </script>
     </div>
+
+
 </body>
 </html>

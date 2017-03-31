@@ -1,0 +1,298 @@
+/* Matireal colors */
+:root {
+    --yellow600: #FDD835;
+
+    --cyan800: #00838F;
+
+    --gray600: #757575;
+    --gray900: #212121;
+
+    --blueGray50: #ECEFF1;
+    --blueGray100: #CFD8DC;
+    --blueGray400: #78909C;
+    --blueGray600: #546E7A;
+
+    --white: #ffffff;
+    --black: #000000;
+}
+
+
+
+
+/* Material components */
+:root {
+    --margin: 16px;
+
+    --sp: 0.062em;
+
+    --line: 48px;
+    --line-wrap: 64px;
+    --line-margin: 8px;
+
+    --card-border-radius: 2px;
+    --card-margin: 16px;
+    --card-ripple-color: rgba(0, 0, 0, 0.2);
+
+    --button-line-height: 16px;
+    --button-rect-height: 36px;
+    --button-rect-side-margin: 14px;
+    --button-small-size: 48px;
+    --button-big-size: 56px;
+    --button-ripple-color: rgba(255, 255, 255, 0.4);
+
+    --elevation-0: none;
+    --elevation-1:   0  0.5px  3px   rgba(0,0,0,0.08),  0  1px    2px   rgba(0,0,0,0.25);
+    --elevation-2:   0  1px    4px   rgba(0,0,0,0.10),  0  1.5px  3px   rgba(0,0,0,0.23);
+    --elevation-3:   0  1.5px  5px   rgba(0,0,0,0.12),  0  2px    4px   rgba(0,0,0,0.22);
+    --elevation-4:   0  2px    6px   rgba(0,0,0,0.14),  0  3px    6px   rgba(0,0,0,0.21);
+    --elevation-5:   0  2.5px  7px   rgba(0,0,0,0.16),  0  4px    8px   rgba(0,0,0,0.20);
+    --elevation-6:   0  3px    8px   rgba(0,0,0,0.18),  0  5px    10px  rgba(0,0,0,0.19);
+    --elevation-7:   0  3.5px  9px   rgba(0,0,0,0.20),  0  6px    12px  rgba(0,0,0,0.18);
+    --elevation-8:   0  4px    10px  rgba(0,0,0,0.22),  0  7px    14px  rgba(0,0,0,0.17);
+    --elevation-9:   0  4.5px  11px  rgba(0,0,0,0.24),  0  8px    16px  rgba(0,0,0,0.16);
+    --elevation-10:  0  5px    12px  rgba(0,0,0,0.26),  0  9px    18px  rgba(0,0,0,0.15);
+    --elevation-11:  0  5.5px  13px  rgba(0,0,0,0.28),  0  10px    20px  rgba(0,0,0,0.14);
+    --elevation-12:  0  6px    14px  rgba(0,0,0,0.30),  0  11px    22px  rgba(0,0,0,0.13);
+}
+
+
+
+
+/* Roboto */
+.roboto {
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+}
+
+.roboto.gray {
+    color: var(--gray600);
+}
+
+.roboto.dark {
+    color: var(--gray900);
+}
+
+.roboto.headline {
+    font-size: calc(var(--sp)*24);
+    font-weight: 400;
+}
+
+.roboto.title {
+    font-size: calc(var(--sp)*20);
+    font-weight: 500;
+}
+
+.roboto.subheading {
+    font-size: calc(var(--sp)*15);
+    font-weight: 400;
+}
+
+.roboto.body-1 {
+    font-size: calc(var(--sp)*13);
+    font-weight: 400;
+}
+
+.roboto.button {
+    font-size: calc(var(--sp)*14);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+
+
+
+/* Wrap for all components */
+.wrap {
+    margin: 0;
+    padding: var(--line-margin);
+    width: inherit;
+    height: inherit;
+}
+
+.wrap.inner {
+    padding: 0;
+}
+
+
+
+
+/* Card */
+.card {
+    background: var(--white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--elevation-2);
+    margin: calc(var(--card-margin));
+
+    width: 100%;
+    height: 100%;
+
+    --ripple-color: var(--card-ripple-color);
+
+    z-index: 5;
+}
+
+.card:hover {
+    box-shadow: var(--elevation-5);
+}
+
+
+.wrap > .card {
+    margin: 0;
+}
+
+
+
+
+/* Button */
+
+.button {
+    --ripple-color: var(--button-ripple-color);
+    z-index: 10;
+    padding: var(--margin);
+    display: inline-flex;
+}
+
+.button.line {
+    height: var(--button-line-height);
+    margin: 0;
+    padding: 0;
+
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+
+    box-shadow: var(--elevation-0);
+}
+
+.button.no-scope {
+    height: var(--line);
+    width: var(--line);
+}
+
+.button.line:hover, .button.no-scope:hover {
+    box-shadow: var(--elevation-0);
+}
+
+.button.rect {
+    height: var(--button-rect-height);
+    margin: var(--button-rect-side-margin) var(--margin);
+    border-radius: var(--card-border-radius);
+
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+
+    box-shadow: var(--elevation-1);
+}
+
+.button.circle {
+    border-radius: 50%;
+    box-shadow: var(--elevation-2);
+}
+
+.button:hover {
+    box-shadow: var(--elevation-8);
+}
+
+.button.small {
+    width: var(--button-small-size);
+    height: var(--button-small-size);
+}
+
+.button.big {
+    width: var(--button-big-size);
+    height: var(--button-big-size);
+}
+
+.wrap > .button {
+    padding: var(--line-margin);
+    margin: 0;
+}
+
+
+
+
+/* Bar */
+.bar {
+    height: var(--line-wrap);
+    width: inherit;
+}
+
+.wrap > .bar {
+    margin: 0;
+}
+
+.bar.inner {
+    margin: 0;
+    height: var(--line);
+}
+
+
+
+
+/* Block */
+.block {
+    width: var(--line);
+    height: var(--line);
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+/* Ripple */
+.ripple {
+    overflow: hidden;
+    position: relative;
+}
+
+.ripple.overflow {
+    overflow: visible;
+}
+
+.ripple > .inside {
+    display: block;
+
+    z-index: 99999999;
+    position: absolute;
+
+    top: 50%; left: 50%;
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%) scale(0);
+    animation:  keyframes-ripple 300ms ease-in;
+    background: var(--ripple-color);
+
+    margin-bottom: 100%;
+}
+
+@keyframes keyframes-ripple {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+
+
+
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
