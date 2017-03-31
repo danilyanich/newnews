@@ -32,7 +32,7 @@ var data = (function () {
             content: 'content',
             tags: ['tag1', 'tag2', 'tag3']
         },{
-            id: '1489693022074',
+            id: '1489693022075',
             image: '/home/danilyanich/Pictures/Плюхи/tumblr_mvs201ekjt1r46py4o1_1280.jpg',
             title: 'title',
             summary: 'Lorem ipsum dolor sit amet var sortArticles = function (articles) { articles.sort(function(obj1, obj2) {return obj2.createdAt - obj1.createdAt; }',
@@ -41,7 +41,7 @@ var data = (function () {
             content: 'content',
             tags: ['tag1', 'tag2', 'tag3']
         },{
-            id: '1489693022074',
+            id: '1489693022076',
             image: '/home/danilyanich/Pictures/Плюхи/original.jpg',
             title: 'title',
             summary: 'summary',
@@ -225,8 +225,8 @@ var dom = (function () {
     }
 
     var remove = function (id) {
-        var post = document.getElementById(id);
-        if (post) post.parentNode.remove();
+        var postWrap = document.getElementById(id).parentNode;
+        if (postWrap) postWrap.parentNode.removeChild(postWrap);
     }
 
     var clear = function () {

@@ -39,8 +39,11 @@ var logica = (function () {
     var openFullscreenWrap = function (callback) {
         document.querySelector('body').style.overflowY = 'hidden';
         var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-        fswrap.style.display = 'flex';
-        fswrap.animate(fade, timing.normal).onfinish = callback;
+        fswrap.style.display = '';
+        fswrap.animate(fade, timing.normal).onfinish = function functionName() {
+            fswrap.style.overflowY = 'scroll';
+            if(callback) callback();
+        };
         return fswrap;
     }
 
@@ -50,7 +53,9 @@ var logica = (function () {
         fswrap.firstElementChild.animate(slide, timing.reverse)
             .onfinish = function () {
                 fswrap.style.display = 'none';
+                fswrap.style.overflowY = '';
                 fswrap.innerHTML = '';
+                if (callback) callback();
             };
     }
 
@@ -245,7 +250,13 @@ var logica = (function () {
             if (event.target.matches('span.form-button.add')){
 
             } else if (event.target.matches('span.form-button.discard')){
-
+                var id =  event.target.querySelectorParent('.middle-content')
+                                            .getAttribute('opened-post');
+                fswrap.removeEventListener('click', closeDetailedForm);
+                alert('post deleted');
+                closeFullscreenWrap(fswrap);
+                dom.remove(id);
+                data.remove(id);
             } else if (event.target.matches('svg.light-svg') ||
                 event.target.matches('span.form-button')) {
                 fswrap.removeEventListener('click', closeDetailedForm);
@@ -257,7 +268,13 @@ var logica = (function () {
             var copy = detailedForm.content.cloneNode(true);
             post = copy.querySelector('.middle-content');
 
-            copy.id = article.id;
+            post.setAttribute('opened-post', article.id);
+            if(article.image) {
+                post.querySelector('img').src = article.image;
+            } else {
+                post.querySelector('img').style.display = 'none';
+                post.querySelector('.post-caption').style.marginTop = '15px';
+            }
             post.querySelector('.post-caption').innerHTML = article.title;
             post.querySelector('.info-bar').innerHTML =
                 article.createdAt.prettyFormat() + ' by' +
@@ -267,25 +284,7 @@ var logica = (function () {
             var tags = '<span class="link-text">' + article.tags.join('</span><span class="link-text">') + '</span>';
             post.querySelector('.tags-line .tags').innerHTML = tags;
 
-            var fswrap = openFullscreenWrap(function () {
-                if(article.image) {
-                    post.querySelector('img').src = article.image;
-                    post.querySelector('img').animate([{
-                            marginTop: '-100%',
-                            opacity: 0
-                        },{
-                            marginTop: '0',
-                            opacity: 1
-                        }],{
-                            duration: 300,
-                            direction: 'normal',
-                            easing: 'ease-out'
-                        });
-                } else {
-                    post.querySelector('img').style.display = 'none';
-                    post.querySelector('.post-caption').style.marginTop = '15px';
-                }
-            });
+            var fswrap = openFullscreenWrap();
 
             fswrap.addEventListener('click', closeDetailedForm);
             fswrap.appendChild(copy);

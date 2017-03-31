@@ -1,8 +1,7 @@
 
 .fullscreen-scrollable-wrap {
-    overflow: auto;
-    width: 100vw;
-    height: 100vh;
+    width: calc(100vw);
+    height: calc(100vh);
     background-color: rgba(0, 0, 0, 0.8);
 
     display: flex;
@@ -390,7 +389,8 @@
 
 .appearing-image {
     width: 100%;
-    transform-origin: top;
+    max-height: 70vh;
+    object-fit: cover;
 }
 
 @media (max-width: 1000px){

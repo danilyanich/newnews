@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600,800|Roboto+Condensed:700|Roboto+Slab:100,300"
         rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
-    <script type="text/javascript" src="scripts/firebase.js"></script>
 </head>
 <body>
 
@@ -202,25 +200,14 @@
 
 
     <div id="scripts">
-        <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
-        <script>
-            var config = {
-                apiKey: "AIzaSyBepwZrFrgNHAB70rtC3MzXg5LWkR5oZ0I",
-                authDomain: "newnews-80fb9.firebaseapp.com",
-                databaseURL: "https://newnews-80fb9.firebaseio.com",
-                storageBucket: "newnews-80fb9.appspot.com",
-                messagingSenderId: "448130359124"
-            };
-            firebase.initializeApp(config);
-        </script>
         <script type="text/javascript" src="scripts/pagination.js"></script>
         <script type="text/javascript" src="scripts/lorem_ipsum.js"></script>
-        <script type="text/javascript" src="scripts/data_managment.js"></script>
+        <script type="text/javascript" src="scripts/database.js"></script>
         <script type="text/javascript" src="scripts/authorization.js"></script>
         <script type="text/javascript" src="scripts/logica.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function (event) {
-                //data.example();
+                data.example();
                 authorization.changeUser('danilyanich');
                 pagination.applyFilter(null);
             });
