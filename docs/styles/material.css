@@ -1,5 +1,11 @@
 /* Matireal colors */
 :root {
+    --red600: #E53935;
+
+    --pink600: #D81B60;
+
+    --green600: #43A047;
+
     --yellow600: #FDD835;
 
     --cyan800: #00838F;
@@ -10,6 +16,7 @@
     --blueGray50: #ECEFF1;
     --blueGray100: #CFD8DC;
     --blueGray400: #78909C;
+    --blueGray500: #607D8B;
     --blueGray600: #546E7A;
 
     --white: #ffffff;
@@ -21,6 +28,8 @@
 
 /* Material components */
 :root {
+    --ease: cubic-bezier(0.35, 0, 0.15, 1);
+
     --margin: 16px;
 
     --sp: 0.062em;
@@ -33,12 +42,12 @@
     --card-margin: 16px;
     --card-ripple-color: rgba(0, 0, 0, 0.2);
 
-    --button-line-height: 16px;
     --button-rect-height: 36px;
     --button-rect-side-margin: 14px;
     --button-small-size: 48px;
     --button-big-size: 56px;
     --button-ripple-color: rgba(255, 255, 255, 0.4);
+    --button-white-ripple-color: rgba(0, 0, 0, 0.4);
 
     --elevation-0: none;
     --elevation-1:   0  0.5px  3px   rgba(0,0,0,0.08),  0  1px    2px   rgba(0,0,0,0.25);
@@ -62,7 +71,7 @@
 .roboto {
     -webkit-font-smoothing: antialiased;
     font-family: 'Roboto', sans-serif;
-    color: #ffffff;
+    color: var(--white);
 }
 
 .roboto.gray {
@@ -99,6 +108,11 @@
     text-transform: uppercase;
 }
 
+.roboto.caption {
+    font-size: calc(var(--sp)*12);
+    font-weight: 500;
+}
+
 
 
 
@@ -112,6 +126,21 @@
 
 .wrap.inner {
     padding: 0;
+}
+
+
+
+
+/* Split */
+.split {
+    height: 1px;
+    width: auto;
+
+    background: var(--blueGray50);
+
+    margin: var(--line-margin);
+    margin-left: 0;
+    margin-right: 0;
 }
 
 
@@ -133,7 +162,7 @@
 }
 
 .card:hover {
-    box-shadow: var(--elevation-5);
+    box-shadow: var(--elevation-4);
 }
 
 
@@ -154,9 +183,9 @@
 }
 
 .button.line {
-    height: var(--button-line-height);
+    height: var(--button-rect-height);
     margin: 0;
-    padding: 0;
+    padding: var(--line-margin);
 
     display: inline-flex;
     align-items: center;
@@ -184,9 +213,14 @@
     width: auto;
 
     box-shadow: var(--elevation-1);
+
+    background: var(--white);
+
+    --ripple-color: var(--button-white-ripple-color);
 }
 
 .button.circle {
+    --ripple-color: var(--button-ripple-color);
     border-radius: 50%;
     box-shadow: var(--elevation-2);
 }
@@ -217,6 +251,7 @@
 .bar {
     height: var(--line-wrap);
     width: inherit;
+    position: relative;
 }
 
 .wrap > .bar {
@@ -255,7 +290,7 @@
 .ripple > .inside {
     display: block;
 
-    z-index: 99999999;
+    z-index: 20;
     position: absolute;
 
     top: 50%; left: 50%;

@@ -7,12 +7,16 @@
     margin: 0;
     padding: 0;
     background: transparent;
-    transition: 0.5s all 0.3s ease;
+    transition: 0.4s all 0.2s var(--ease);
     cursor: default;
     box-sizing: border-box;
 }
 
-input {
+body {
+    overflow-x: hidden;
+}
+
+input, button {
     outline: none;
     border: none;
 }

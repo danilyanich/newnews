@@ -1,17 +1,6 @@
+'uses strict';
 
-var logica = (function () {
-
-    HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-
-    HTMLElement.prototype.querySelectorParent = function (query) {
-        var element = this;
-        while (element) {
-            if (!element.matches) return;
-            if (element.matches(query))
-                return element;
-            element = element.parentNode;
-        }
-    }
+const logica = (() => {
 
     var fade = [
         { opacity: '0.0' },
@@ -316,9 +305,9 @@ var logica = (function () {
 
     document.addEventListener('DOMContentLoaded', function (event) {
         // link events
-        document.querySelector('div.fullscreen-scrollable-wrap').addEventListener('click', closeFullscreenWrapEvent);
+        // document.querySelector('div.fullscreen-scrollable-wrap').addEventListener('click', closeFullscreenWrapEvent);
         document.getElementById('plus').addEventListener('click', addEditForm.open);
-        document.querySelector('header.header.v-align div.v-align').addEventListener('click', authorizationForm.open);
+        // document.querySelector('header.header.v-align div.v-align').addEventListener('click', authorizationForm.open);
         document.forms.searchInput.onsubmit = search;
         document.querySelector('#post-placeholder').addEventListener('click', postPlaceholderEventHandler);
     });
