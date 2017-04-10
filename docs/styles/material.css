@@ -3,12 +3,14 @@
     --red600: #E53935;
 
     --pink600: #D81B60;
+    --pinkA700: #C51162;
 
     --green600: #43A047;
 
     --yellow600: #FDD835;
 
     --cyan800: #00838F;
+    --cyan900: #006064;
 
     --gray600: #757575;
     --gray900: #212121;
@@ -121,7 +123,7 @@
     margin: 0;
     padding: var(--line-margin);
     width: inherit;
-    height: inherit;
+    /*height: inherit;*/
 }
 
 .wrap.inner {

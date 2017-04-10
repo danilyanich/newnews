@@ -54,8 +54,16 @@ const pages = (() => {
     const applyFilter = (filter) => {
         qs('.show-more').style.visibility = '';
         page.offset = 0;
-        dom.clear();
-        showMore();
+        id('post-placeholder').animate([
+            { transform: 'translateY(0) scale(1)', opacity: 1 },
+            { transform: 'translateY(calc(var(--line))) scale(0.95)', opacity: 0 }
+        ],{
+            duration: 300,
+            easing: 'ease-in'
+        }).onfinish = () => {
+            dom.clear();
+            showMore();
+        };
     }
 
     qs('.wrap.overflow').on('scroll', niceReveal);
