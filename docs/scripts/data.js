@@ -24,7 +24,6 @@ const data = (() => {
         }
     }
 
-
     storage.push = (id, article) => {
         storage.data[id] = article;
         if (!storage.order.includes(id))
@@ -77,7 +76,7 @@ const data = (() => {
             title: 'Motion provides meaning',
             summary: 'Motion respects and reinforces the user as the prime mover. Primary user actions are inflection points that initiate motion, transforming the whole design.',
             createdAt: new Date(),
-            author: 'Google ',
+            author: 'Google',
             content: 'All action takes place in a single environment. Objects are presented to the user without breaking the continuity of experience even as they transform and reorganize. Motion is meaningful and appropriate, serving to focus attention and maintain continuity. Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.',
             tags: ['motion', 'concept']
         });
@@ -87,9 +86,29 @@ const data = (() => {
             title: 'Bold, graphic, intentional',
             summary: 'An emphasis on user actions makes core functionality immediately apparent and provides waypoints for the user.',
             createdAt: new Date(),
-            author: 'Google ',
+            author: 'Google',
             content: 'The foundational elements of print-based design – typography, grids, space, scale, color, and use of imagery – guide visual treatments. These elements do far more than please the eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge-to-edge imagery, large-scale typography, and intentional white space create a bold and graphic interface that immerse the user in the experience.',
             tags: ['intentional']
+        });
+
+        storage.push('1489693022079', {
+            image: '/home/danilyanich/Pictures/RandomStack/1391534545_1440395578.gif',
+            title: 'Lorem, ipsum, dolor',
+            summary: 'Разработать консольное приложение на Java. Функция представлена в виде своего ряда Тейлора. Вычислить приближённое значение суммы этого бесконечного ряда. Вычисления заканчивать, когда очередное слагаемое окажется по модулю меньше заданного числа . Вид этого числа определяется  следующим условием:   = 10-k, где k – натуральное число. Сравнить полученный результат со значением, вычисленным через стандартные функции. Значения x и k ввести с клавиатуры. Вывод результата осуществить с k+1 знаками после десятичной точки.',
+            createdAt: new Date(),
+            author: 'danilyanich',
+            content: 'The foundational elements of print-based design – typography, grids, space, scale, color, and use of imagery – guide visual treatments. These elements do far more than please the eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge-to-edge imagery, large-scale typography, and intentional white space create a bold and graphic interface that immerse the user in the experience.',
+            tags: ['gif', 'java']
+        });
+
+        storage.push('1489693022080', {
+            image: '/home/danilyanich/Pictures/Плюхи/wallpaper_SWBF_3840x2160.jpg',
+            title: 'Star Wars Battlefront',
+            summary: 'Разработать консольное приложение на Java. Функция представлена в виде своего ряда Тейлора. Вычислить приближённое значение суммы этого бесконечного ряда. Вычисления заканчивать, когда очередное слагаемое окажется по модулю меньше заданного числа . Вид этого числа определяется  следующим условием:   = 10-k, где k – натуральное число. Сравнить полученный результат со значением, вычисленным через стандартные функции. Значения x и k ввести с клавиатуры. Вывод результата осуществить с k+1 знаками после десятичной точки.',
+            createdAt: new Date(),
+            author: 'danilyanich',
+            content: 'The foundational elements of print-based design – typography, grids, space, scale, color, and use of imagery – guide visual treatments. These elements do far more than please the eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge-to-edge imagery, large-scale typography, and intentional white space create a bold and graphic interface that immerse the user in the experience.',
+            tags: ['gif', 'java']
         });
 
     }

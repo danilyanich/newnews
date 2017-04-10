@@ -2,63 +2,100 @@
 
 const logica = (() => {
 
-    var fade = [
-        { opacity: '0.0' },
-        { opacity: '1.0' }
-    ];
+    const animation = {
+        fade: [
+            { opacity: '0.0' },
+            { opacity: '1.0' }
+        ],
+        slide: [
+            { transform: 'translateY(var(--line-wrap)) scale(0.9)' },
+            { transform: 'translateY(0px) scale(1)' }
+        ]
+    }
 
-    var slide = [
-        { transform: 'translateY(25px) scale(0.9)' },
-        { transform: 'translateY(0px) scale(1)' }
-    ];
-
-    var timing = {
+    const timing = {
         normal: {
             duration: 200,
             direction: 'normal',
             easing: 'ease-out'
         },
         reverse: {
-            duration: 200,
+            duration: 400,
             direction: 'reverse',
             easing: 'ease-in'
         }
     };
 
-    var openFullscreenWrap = function (callback) {
-        document.querySelector('body').style.overflowY = 'hidden';
-        var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-        fswrap.style.display = '';
-        fswrap.animate(fade, timing.normal).onfinish = function functionName() {
-            fswrap.style.overflowY = 'scroll';
-            if(callback) callback();
-        };
-        return fswrap;
+    const openOverlay = (callback) => {
+        qs('body').style.overflowY = 'hidden';
+        let overlay = id('overlay');
+        overlay.style.display = '';
+        if(callback)
+            overlay.animate(animation.fade, timing.normal)
+                .onfinish = callback;
+        return overlay;
     }
 
-    var closeFullscreenWrap = function(fswrap, callback) {
-        document.querySelector('body').style.overflowY = 'scroll';
-        fswrap.animate(fade, timing.reverse);
-        fswrap.firstElementChild.animate(slide, timing.reverse)
-            .onfinish = function () {
-                fswrap.style.display = 'none';
-                fswrap.style.overflowY = '';
-                fswrap.innerHTML = '';
+    const closeOverlay = (callback) => {
+        let overlay = id('overlay');
+        qs('body').style.overflowY = 'scroll';
+        overlay.animate(animation.fade, timing.reverse)
+            .onfinish = () => {
+                overlay.style.display = 'none';
+                overlay.innerHTML = '';
                 if (callback) callback();
             };
+        if (overlay.firstElementChild)
+            overlay.firstElementChild.animate(animation.slide, timing.reverse);
     }
 
-    var closeFullscreenWrapEvent = function (event) {
-        var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-        var mwrap = document.querySelector('div.fullscreen-scrollable-wrap div.middle-wrap');
-
-        if(event.target === fswrap || event.target === mwrap) {
+    var closeOverlayEvent = (event) => {
+        if(event.target === event.currentTarget) {
             event.preventDefault();
-            closeFullscreenWrap(fswrap);
+            closeOverlay();
         }
     }
 
-    var addEditForm = (function () {
+    id('overlay').on('click', closeOverlayEvent);
+
+    let detailed = (() => {
+        let template = id('detailed-post-template');
+
+        const open = (_id) => {
+
+            openOverlay();
+
+            let article = data.getById(_id);
+            let content = template.content.cloneNode(true);
+            let post = content.querySelector('.card');
+
+            if (article.image)
+                post.qs('img').src = article.image;
+            else {
+                post.qs('img').style.display = 'none';
+                post.qs('.title').classList.add('dark');
+                post.qs('.title').classList.add('no-image');
+            }
+            post.qs('.title').innerHTML = article.title;
+            post.qs('.info').innerHTML = '<span class="author">' + article.author + '</span>' +
+                article.createdAt.prettyFormat();
+            post.qs('.summary').innerHTML = article.summary;
+            post.qs('.content').innerHTML = article.content;
+            let tags = '<div>' +  article.tags.join('</div><div>') + '</div>';
+            post.qs('.tags').innerHTML = tags;
+
+            id('overlay').appendChild(content);
+        }
+
+        // id('post-placeholder').on('click', (event) => {
+        //     if (event.target.querySelectorParent('.post-menu')) {
+        //         let parent = event.target.querySelectorParent('.post');
+        //         if (parent) open(parent.id);
+        //     }
+        // });
+    })();
+
+    /*var addEditForm = (function () {
 
         var editAddForm = document.getElementById('edit-add-form-template');
 
@@ -179,7 +216,7 @@ const logica = (() => {
                 var login = form.login.value;
                 var password = form.password.value;
                 firebase.auth().signInWithEmailAndPassword(login, password).then(function () {
-                    authorization.changeUser(login.replace(/@.*/,''));
+                    authorization.changeUser(login.replace(/@.*//*,''));
                     authorization.authorize();
                     var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
                     fswrap.removeEventListener('click', closeAuthorizationForm);
@@ -310,6 +347,6 @@ const logica = (() => {
         // document.querySelector('header.header.v-align div.v-align').addEventListener('click', authorizationForm.open);
         document.forms.searchInput.onsubmit = search;
         document.querySelector('#post-placeholder').addEventListener('click', postPlaceholderEventHandler);
-    });
+    });*/
 
 })();

@@ -22,15 +22,27 @@
     <div class="wrap post">
     <div class="card ripple" style="display: none;">
 
+        <div class="bar wrap top-bar">
+            <img src="http://www.free-icons-download.net/images/google-logo-icon-blue-66106.png" class="author-avatar"></img>
+            <div class="bar wrap inner">
+                <div class="roboto subheading dark q-author"></div>
+                <div class="roboto caption gray q-timing"></div>
+            </div>
+
+            <div class="button no-scope more ripple overflow centered post-menu">
+                <i class="material-icons md-dark md-24">more_vert</i>
+            </div>
+
+        </div>
+
         <div class="title-wrap">
-            <img src=""></img>
-            <div class="roboto title"></div>
+            <img class="article-image" src=""></img>
+            <div class="roboto title q-title"></div>
         </div>
         <div class="wrap">
             <div class="roboto body-1 dark summary"></div>
             <div class="wrap inner">
                 <div class="roboto body-1 gray centered tags"></div>
-                <div class="roboto caption gray centered info"></div>
             </div>
         </div>
 
@@ -38,25 +50,38 @@
 
 
     <template id="detailed-post-template">
+    <div class="wrap post" style="max-width: calc(var(--line-wrap)*11);">
+    <div class="card ripple">
 
-        <!-- after summary -->
-        <div class="roboto body-1 dark summary content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <div class="title-wrap">
+            <img src=""></img>
+            <div class="roboto title"></div>
+        </div>
+        <div class="wrap">
 
-        <!-- after info -->
-        <div class="split"></div>
-        <div class="buttons-wrap wrap">
-            <div class="roboto gray button line ripple centered overflow delete">delete</div>
-            <div class="roboto gray button line ripple centered overflow edit">edit</div>
-            <i class="material-icons md-24 ripple overflow centered md-dark like">favorite</i>
+            <div class="roboto body-1 dark summary"></div>
+            <!-- after summary -->
+            <div class="roboto body-1 dark summary content"></div>
+
+            <div class="wrap inner">
+                <div class="roboto body-1 gray centered tags"></div>
+                <div class="roboto caption gray centered info"></div>
+            </div>
+
+            <!-- after info -->
+            <div class="split"></div>
+            <div class="buttons-wrap wrap">
+                <div class="roboto gray button line ripple centered overflow delete">delete</div>
+                <div class="roboto gray button line ripple centered overflow edit">edit</div>
+                <i class="material-icons md-24 ripple overflow centered md-dark like">favorite</i>
+            </div>
+
         </div>
 
-    </template>
+    </div></div></template>
 
-
-
-    <div id="overlay" style="display: none"></div>
     <div id="side-menu" style="display: none"></div>
-
+    <div id="overlay" style="display: none"></div>
 
     <div class="intro">
     <div class="bar wrap">
@@ -88,15 +113,14 @@
     <div class="search-bar bar wrap">
     <form class="search card ripple" name="searchInput">
 
-        <input class="bar inner roboto subheading gray" placeholder="Search" name="search"></input>
+        <input class="bar inner roboto subheading" placeholder="Search" name="search" autocomplete="off"></input>
         <button class="block ripple overflow centered" name="submit">
-            <i class="material-icons md-dark md-24 self centered">search</i>
+            <i class="material-icons md-light md-24 self centered">search</i>
         </button>
 
     </form></div>
 
     </div>
-
 
     <!-- floating plus -->
     <span id="plus" class="button circle big ripple centered">
@@ -124,6 +148,7 @@
         <script type="text/javascript" src="scripts/pages.js"></script>
         <script type="text/javascript" src="scripts/auth.js"></script>
         <script type="text/javascript" src="scripts/ripple.js"></script>
+        <script type="text/javascript" src="scripts/logica.js"></script>
         <script type="text/javascript" src="scripts/__main.js"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function(){
