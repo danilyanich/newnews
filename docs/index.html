@@ -25,11 +25,11 @@
         <div class="bar wrap top-bar">
             <img src="http://www.free-icons-download.net/images/google-logo-icon-blue-66106.png" class="author-avatar"></img>
             <div class="bar wrap inner">
-                <div class="roboto subheading dark q-author"></div>
-                <div class="roboto caption gray q-timing"></div>
+                <div class="roboto dark author"></div>
+                <div class="roboto gray timing"></div>
             </div>
 
-            <div class="button no-scope more ripple overflow centered post-menu">
+            <div class="button no-hover ripple overflow centered post-menu">
                 <i class="material-icons md-dark md-24">more_vert</i>
             </div>
 
@@ -39,11 +39,22 @@
             <img class="article-image" src=""></img>
             <div class="roboto title q-title"></div>
         </div>
+
         <div class="wrap">
             <div class="roboto body-1 dark summary"></div>
             <div class="wrap inner">
                 <div class="roboto body-1 gray centered tags"></div>
             </div>
+        </div>
+
+
+        <div class="split"></div>
+
+        <div class="bar inner bottom-bar">
+            <div class="button no-hover ripple centered overflow like">
+                <i class="material-icons md-24">favorite</i>
+            </div>
+            <div class="roboto subheading dark centered like-count">9124</div>
         </div>
 
     </div></div></template>
@@ -80,8 +91,8 @@
 
     </div></div></template>
 
-    <div id="side-menu" style="display: none"></div>
     <div id="overlay" style="display: none"></div>
+    <div id="side-menu" style="display: none"></div>
 
     <div class="intro">
     <div class="bar wrap">
@@ -124,12 +135,25 @@
 
     <!-- floating plus -->
     <span id="plus" class="button circle big ripple centered">
-        <i class="material-icons md-light md-24 centered">add</i>
+        <i class="material-icons md-light md-24 centered">keyboard_arrow_up</i>
     </span>
 
 
     <!-- main content -->
     <div class="wrap overflow">
+
+        <div class="wrap">
+        <div class="add-form-glimpse card ripple">
+
+            <img src="http://www.free-icons-download.net/images/google-logo-icon-blue-66106.png"></img>
+            <div class="roboto subheading gray line centered">
+                What's new?
+            </div>
+            <div class="button no-scope ripple overflow centered send">
+                <i class="material-icons md-24">send</i>
+            </div>
+
+        </div></div>
 
         <div id="post-placeholder" class="wrap inner"></div>
 

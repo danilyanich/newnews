@@ -2,6 +2,7 @@
 :root {
     --red600: #E53935;
 
+    --pink300: #F06292;
     --pink600: #D81B60;
     --pinkA700: #C51162;
 
@@ -9,6 +10,7 @@
 
     --yellow600: #FDD835;
 
+    --cyan300: #4DD0E1;
     --cyan800: #00838F;
     --cyan900: #006064;
 
@@ -30,11 +32,17 @@
 
 /* Material components */
 :root {
-    --ease: cubic-bezier(0.35, 0, 0.15, 1);
+    --ease: cubic-bezier(0.4, 0.0, 0.2, 1);
+    --ease-in: cubic-bezier(0.0, 0.0, 0.2, 1);
+    --ease-out: cubic-bezier(0.4, 0.0, 1, 1);
+    --ease-sharp: cubic-bezier(0.4, 0.0, 0.6, 1);
+
+    --transition: 0.4s all 0.2s var(--ease);
 
     --margin: 16px;
 
     --sp: 0.062em;
+    --dp: 1px;
 
     --line: 48px;
     --line-wrap: 64px;
@@ -139,10 +147,7 @@
     width: auto;
 
     background: var(--blueGray50);
-
-    margin: var(--line-margin);
-    margin-left: 0;
-    margin-right: 0;
+    margin: var(--line-margin) 0;
 }
 
 
@@ -161,12 +166,13 @@
     --ripple-color: var(--card-ripple-color);
 
     z-index: 5;
+
+    transition: var(--transition);
 }
 
 .card:hover {
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--elevation-6);
 }
-
 
 .wrap > .card {
     margin: 0;
@@ -182,6 +188,8 @@
     z-index: 10;
     padding: var(--margin);
     display: inline-flex;
+
+    transition: var(--transition);
 }
 
 .button.line {
@@ -201,7 +209,7 @@
     width: var(--line);
 }
 
-.button.line:hover, .button.no-scope:hover {
+.button.line:hover, .button.no-scope:hover, .button.no-hover:hover {
     box-shadow: var(--elevation-0);
 }
 
@@ -308,7 +316,7 @@
 @keyframes keyframes-ripple {
     from {
         transform: translate(-50%, -50%) scale(0);
-        opacity: 1;
+        opacity: 0.75;
     }
     to {
         transform: translate(-50%, -50%) scale(1);

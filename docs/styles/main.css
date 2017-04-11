@@ -7,7 +7,6 @@
     margin: 0;
     padding: 0;
     background: transparent;
-    transition: 0.4s all 0.2s var(--ease);
     cursor: default;
     box-sizing: border-box;
 }
