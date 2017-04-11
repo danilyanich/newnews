@@ -42,7 +42,7 @@ const data = (() => {
     const addExample = () => {
 
         storage.push('1489693022074', {
-            image: '/home/danilyanich/Pictures/Плюхи/cg/paul-chadeisson-testspeed-0153b2-01.jpg',
+            image: 'https://storage.googleapis.com/material-design/publish/material_v_11/assets/0Bx4BSt6jniD7Y1huOXVQdlFPMmM/materialdesign_introduction.png',
             title: 'Material design',
             summary: 'We challenged ourselves to create a visual language for our users that synthesizes the classic principles of good design with the innovation and possibility of technology and science. This is material design. This spec is a living document that will be updated as we continue to develop the tenets and specifics of material design.',
             createdAt: new Date(1489693022074),
@@ -52,7 +52,7 @@ const data = (() => {
         });
 
         storage.push('1489693022075', {
-            image: '/home/danilyanich/Pictures/Плюхи/cg/andreas-rocha-winterlights01.jpg',
+            image: 'https://storage.googleapis.com/material-design/publish/material_v_11/assets/0Bx4BSt6jniD7QTA5cHFBUlV3RTA/materialdesign_goals_language.png',
             title: 'Goals',
             summary: 'Create a visual language that synthesizes classic principles of good design with the innovation and possibility of technology and science.',
             createdAt: new Date(),
@@ -62,7 +62,7 @@ const data = (() => {
         });
 
         storage.push('1489693022076', {
-            image: '/home/danilyanich/Pictures/Плюхи/elitefon.ru_17543.jpg',
+            image: 'https://storage.googleapis.com/material-design/publish/material_v_11/assets/0Bx4BSt6jniD7VG9DQVluOFJ4Tnc/materialdesign_principles_metaphor.png',
             title: 'Material is the metaphor',
             summary: 'A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic.',
             createdAt: new Date(),
@@ -82,7 +82,7 @@ const data = (() => {
         });
 
         storage.push('1489693022078', {
-            image: '/home/danilyanich/Pictures/Плюхи/material/14-77.jpg',
+            image: 'https://storage.googleapis.com/material-design/publish/material_v_11/assets/0Bx4BSt6jniD7NndTQW9VZTlZV2s/materialdesign_principles_bold.png',
             title: 'Bold, graphic, intentional',
             summary: 'An emphasis on user actions makes core functionality immediately apparent and provides waypoints for the user.',
             createdAt: new Date(),
@@ -92,13 +92,13 @@ const data = (() => {
         });
 
         storage.push('1489693022079', {
-            image: '/home/danilyanich/Pictures/RandomStack/1391534545_1440395578.gif',
-            title: 'Lorem, ipsum, dolor',
-            summary: 'Разработать консольное приложение на Java. Функция представлена в виде своего ряда Тейлора. Вычислить приближённое значение суммы этого бесконечного ряда. Вычисления заканчивать, когда очередное слагаемое окажется по модулю меньше заданного числа . Вид этого числа определяется  следующим условием:   = 10-k, где k – натуральное число. Сравнить полученный результат со значением, вычисленным через стандартные функции. Значения x и k ввести с клавиатуры. Вывод результата осуществить с k+1 знаками после десятичной точки.',
+            image: 'https://storage.googleapis.com/material-design/publish/material_v_11/assets/0BybB4JO78tNpRlY1eHJ4LTh4ZjQ/01-duration-and-easing.png',
+            title: 'Duration & easing',
+            summary: 'Material in motion is responsive and natural. Use these easing curves and duration patterns to create smooth and consistent motion.',
             createdAt: new Date(),
-            author: 'danilyanich',
-            content: 'The foundational elements of print-based design – typography, grids, space, scale, color, and use of imagery – guide visual treatments. These elements do far more than please the eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge-to-edge imagery, large-scale typography, and intentional white space create a bold and graphic interface that immerse the user in the experience.',
-            tags: ['gif', 'java']
+            author: 'Google',
+            content: 'When elements move between positions or states, the movement should be fast enough that it doesn\'t cause waiting, but slow enough that the transition can be understood. Keep transitions short as users will see them frequently.',
+            tags: ['speed', 'balance', 'easing']
         });
 
         storage.push('1489693022080', {

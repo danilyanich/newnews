@@ -43,3 +43,7 @@ const id = (id) => {
 }
 
 const on = document.addEventListener;
+
+const marcoTask = (callback) => {
+    setTimeout(callback, 0);
+}
