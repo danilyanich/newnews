@@ -111,6 +111,17 @@ const data = (() => {
             tags: ['gif', 'java']
         });
 
+        for (let i = 0; i < 10000; i++) {
+            storage.push('' + i, {
+                title: 'title' + i,
+                summary: 'summary' + i,
+                createdAt: new Date(i),
+                author: 'danilyanich',
+                content: 'content' + i,
+                tags: ['tag' + Math.ceil(Math.random() * i), 'tag' + Math.ceil(Math.random() * i)]
+            });
+        }
+
     }
 
     let lastQueryLength = 0;
@@ -132,8 +143,8 @@ const data = (() => {
             }
             if (filter.tags) {
                 slice = slice.filter(function (id) {
-                    for (let tag in filter.tags) {
-                        if (storage.tags[tag].includes(id))
+                    for (let tag of filter.tags) {
+                        if (storage.tags[tag] && storage.tags[tag].includes(id))
                             return true;
                     }
                     return false;

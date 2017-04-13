@@ -51,5 +51,6 @@ qs('.button.refresh').on('click', (event) => {
         direction: 'normal',
         easing: 'ease'
     });
+    document.forms.searchInput.search.value = '';
     pages.applyFilter(null);
 });

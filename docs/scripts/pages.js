@@ -33,11 +33,11 @@ const pages = (() => {
         count: 6
     };
 
-    let filter = null;
+    let currentFilter = null;
 
     const showMore = (event) => {
 
-        let pairs = data.getMultiple(page, filter);
+        let pairs = data.getMultiple(page, currentFilter);
 
         if (page.offset <= data.lastQueryLength())
             page.offset += page.count;
@@ -45,15 +45,19 @@ const pages = (() => {
             qs('.show-more').style.visibility = 'hidden';
 
         for (let pair of pairs) {
-            dom.add(pair.id, pair.article, 'append');
+            marcoTask(() => {
+                dom.add(pair.id, pair.article, 'append');
+            });
         }
 
-        forceReveal();
+        marcoTask(forceReveal);
     }
 
     const applyFilter = (filter) => {
+
         qs('.show-more').style.visibility = '';
         page.offset = 0;
+
         id('post-placeholder').animate([
             { transform: 'translateY(0) scale(1)', opacity: 1 },
             { transform: 'translateY(calc(var(--line))) scale(0.95)', opacity: 0 }
@@ -61,10 +65,23 @@ const pages = (() => {
             duration: 300,
             easing: 'ease-in'
         }).onfinish = () => {
+            currentFilter = filter;
             dom.clear();
             showMore();
         };
     }
+
+    const search = (event) => {
+        event.preventDefault();
+        let string = document.forms.searchInput.search.value;
+        let config = {};
+        let tags = string.split(/\s+/).filter(tag => tag.match(/#\w+/)).map(tag => tag.replace('#', ''));
+        if (tags.length) config.tags = tags;
+
+        applyFilter(config);
+    }
+
+    document.forms.searchInput.onsubmit = search;
 
     qs('.wrap.overflow').on('scroll', niceReveal);
 

@@ -22,6 +22,7 @@ const dom = (() => {
         }
         post.qs('.title').innerHTML = article.title;
         post.qs('.author').innerHTML = article.author;
+        post.qs('.author-avatar').src = auth.getUserData(article.author).avatar;
         post.qs('.timing').innerHTML = article.createdAt.prettyFormat();
         post.qs('.summary').innerHTML = article.summary;
         let tags = '<div>' +  article.tags.join('</div><div>') + '</div>';
