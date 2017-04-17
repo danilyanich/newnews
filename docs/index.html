@@ -6,11 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700|Roboto:100,300,400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
-
-    <link href="styles/main.css" rel="stylesheet" type="text/css">
     <link href="styles/material.css" rel="stylesheet" type="text/css">
+    <link href="styles/main.css" rel="stylesheet" type="text/css">
     <link href="styles/styles.css" rel="stylesheet" type="text/css">
 
 
@@ -20,7 +17,7 @@
 
     <template id="post-template">
     <div class="wrap post">
-    <div class="card ripple" style="display: none;">
+    <div class="card" style="display: none;">
 
         <div class="bar wrap top-bar">
             <img src="" class="author-avatar"></img>
@@ -55,6 +52,9 @@
                 <i class="material-icons md-24">favorite</i>
             </div>
             <div class="roboto subheading dark centered like-count">9124</div>
+            <div class="roboto gray button line ripple centered overflow show-full">
+                show full
+            </div>
         </div>
 
     </div></div></template>
@@ -95,41 +95,42 @@
     <div id="side-menu" style="display: none"></div>
 
     <div class="intro">
-    <div class="bar wrap">
 
-        <!-- menu -->
-        <div class="button no-scope menu ripple overflow centered">
-            <i class="material-icons md-light md-24">menu</i>
-        </div>
+        <div class="bar wrap">
 
-        <!-- newnews logo -->
-        <div class="bar logo centered">
-            <span class="roboto headline">Newnews</span>
-        </div>
-
-        <!-- right side buttons -->
-        <div class="wrap refresh-more">
-
-            <div class="button no-scope refresh ripple overflow centered">
-                <i class="material-icons md-light md-24">refresh</i>
+            <!-- menu -->
+            <div class="button no-scope menu ripple overflow centered">
+                <i class="material-icons md-light md-24">menu</i>
             </div>
 
-            <div class="button no-scope more ripple overflow centered">
-                <i class="material-icons md-light md-24">more_vert</i>
+            <!-- newnews logo -->
+            <div class="bar logo centered">
+                <span class="roboto headline">Newnews</span>
             </div>
 
+            <!-- right side buttons -->
+            <div class="wrap refresh-more">
+
+                <div class="button no-scope refresh ripple overflow centered">
+                    <i class="material-icons md-light md-24">refresh</i>
+                </div>
+
+                <div class="button no-scope more ripple overflow centered">
+                    <i class="material-icons md-light md-24">more_vert</i>
+                </div>
+
+            </div>
         </div>
-    </div>
 
-    <div class="search-bar bar wrap">
-    <form class="search card ripple" name="searchInput">
+        <div class="search-bar bar wrap">
+        <form class="search card ripple" name="searchInput">
 
-        <input class="bar inner roboto subheading" placeholder="Search" name="search" autocomplete="off"></input>
-        <button class="block ripple overflow centered" name="submit">
-            <i class="material-icons md-light md-24 self centered">search</i>
-        </button>
+            <input class="bar inner roboto subheading" placeholder="Search" name="search" autocomplete="off"></input>
+            <button class="block ripple overflow centered" name="submit">
+                <i class="material-icons md-light md-24 self centered">search</i>
+            </button>
 
-    </form></div>
+        </form></div>
 
     </div>
 
@@ -142,10 +143,10 @@
     <!-- main content -->
     <div class="wrap overflow main-content">
 
-        <div class="wrap">
+        <div class="wrap add-form-glimpse-wrap" style="display: none">
         <div class="add-form-glimpse card ripple">
 
-            <img src="http://www.free-icons-download.net/images/google-logo-icon-blue-66106.png"></img>
+            <img src=""></img>
             <div class="roboto subheading gray line centered">
                 What's new?
             </div>
