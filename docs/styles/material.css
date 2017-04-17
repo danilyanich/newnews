@@ -1,3 +1,51 @@
+
+/* Font faces */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/MaterialIcons-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/roboto/Roboto-Medium.ttf');
+}
+
+
+
+
+/* Matireal icons */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+
+
+
 /* Matireal colors */
 :root {
     --red600: #E53935;
@@ -164,8 +212,8 @@
     height: 100%;
 
     --ripple-color: var(--card-ripple-color);
-
     z-index: 5;
+    overflow: hidden;
 
     transition: var(--transition);
 }
