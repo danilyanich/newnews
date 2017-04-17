@@ -38,6 +38,11 @@ const qs = (query) => {
     return document.querySelector(query);
 }
 
+const qsA = (query) => {
+    return document.querySelectorAll(query);
+}
+
+
 const id = (id) => {
     return document.getElementById(id);
 }
