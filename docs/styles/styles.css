@@ -132,11 +132,14 @@ body {
     padding: 16px;
 }
 
-.top-bar .bar {
-    justify-content: center;
+.top-bar .bar.wrap.inner {
+    justify-content: space-around;
     flex-direction: column;
     padding-left: 8px;
     height: 40px;
+
+    width: auto;
+    margin-right: auto;
 }
 
 .post .card {
@@ -294,12 +297,19 @@ form.search > input {
     right: 0;
 }
 
+.refresh-more div.button {
+    display: inline-flex;
+}
+
 
 /*----------------------------------------------------------------------------*/
 
 
 .button.show-full {
     margin-left: auto;
+    --ripple-color: var(--button-white-ripple-color);
+    padding: 16px;
+    height: inherit;
 }
 
 
@@ -313,6 +323,9 @@ form.search > input {
 
 /*----------------------------------------------------------------------------*/
 
+.wrap.add-form-glimpse-wrap {
+    animation: 300ms add-form-glimpse-slide-animation;
+}
 
 .add-form-glimpse {
     display: flex;
@@ -338,6 +351,16 @@ form.search > input {
     height: 64px;
     width: 64px;
     padding: 16px;
+}
+
+
+@keyframes add-form-glimpse-slide-animation {
+    from {
+        transform: translateY(-72px);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 
