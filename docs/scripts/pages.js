@@ -1,12 +1,11 @@
 'uses strict';
 
 const pages = (() => {
-
     let pass = null;
 
     const resetCurrentRevalingElement = () => {
         pass = id('post-placeholder').firstElementChild;
-    }
+    };
 
     const niceReveal = (event) => {
         if (!pass) resetCurrentRevalingElement();
@@ -17,7 +16,7 @@ const pages = (() => {
                 pass = nextPass;
             }
         }
-    }
+    };
 
     const forceReveal = () => {
         for (let element of id('post-placeholder').qsA('.wrap.post')) {
@@ -26,7 +25,7 @@ const pages = (() => {
                 pass = element;
             }
         }
-    }
+    };
 
     let page = {
         offset: 0,
@@ -36,7 +35,6 @@ const pages = (() => {
     let currentFilter = null;
 
     const showMore = (event) => {
-
         let pairs = data.getMultiple(page, currentFilter);
 
         if (page.offset <= data.lastQueryLength())
@@ -44,24 +42,23 @@ const pages = (() => {
         if (page.offset >= data.lastQueryLength())
             qs('.show-more').style.visibility = 'hidden';
 
-        for (let pair of pairs) {
+        pairs.forEach(pair => {
             marcoTask(() => {
                 dom.add(pair.id, pair.article, 'append');
             });
-        }
+        });
 
         marcoTask(forceReveal);
-    }
+    };
 
     const applyFilter = (filter) => {
-
         qs('.show-more').style.visibility = '';
         page.offset = 0;
 
         id('post-placeholder').animate([
             { transform: 'translateY(0) scale(1)', opacity: 1 },
             { transform: 'translateY(calc(var(--line))) scale(0.95)', opacity: 0 }
-        ],{
+        ], {
             duration: 300,
             easing: 'ease-in'
         }).onfinish = () => {
@@ -69,7 +66,7 @@ const pages = (() => {
             dom.clear();
             showMore();
         };
-    }
+    };
 
     const search = (event) => {
         event.preventDefault();
@@ -79,7 +76,7 @@ const pages = (() => {
         if (tags.length) config.tags = tags;
 
         applyFilter(config);
-    }
+    };
 
     document.forms.searchInput.onsubmit = search;
 
@@ -89,7 +86,6 @@ const pages = (() => {
 
     return {
         applyFilter: applyFilter,
-        showMore: showMore,
-    }
-
+        showMore: showMore
+    };
 })();

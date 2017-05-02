@@ -1,5 +1,5 @@
 
-    document.addEventListener('DOMContentLoaded', function(){
-        data.example();
-        pages.showMore();
-    });
+on('DOMContentLoaded', () => {
+    data.example();
+    pages.showMore();
+});

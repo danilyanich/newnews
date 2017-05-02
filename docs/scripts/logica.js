@@ -95,6 +95,19 @@ const logica = (() => {
         // });
     })();
 
+    qs('.button.refresh').on('click', (event) => {
+        event.target.animate([
+            { transform: 'rotate(0deg)' },
+            { transform: 'rotate(360deg)' }
+        ], {
+            duration: 800,
+            direction: 'normal',
+            easing: 'ease'
+        });
+        document.forms.searchInput.search.value = '';
+        pages.applyFilter(null);
+    });
+
     /*var addEditForm = (function () {
 
         var editAddForm = document.getElementById('edit-add-form-template');

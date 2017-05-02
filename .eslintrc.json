@@ -1,0 +1,46 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": "airbnb-base/legacy",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "curly": [
+            "error",
+            "multi"
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "quote-props": [
+            "error",
+            "consistent"
+        ],
+        "no-param-reassign": [
+            "error",
+            { "props": false }
+        ],
+        "no-unused-vars": [
+            "warn"
+        ],
+        "no-undef": [
+            "warn"
+        ]
+    }
+}
