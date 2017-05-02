@@ -377,6 +377,6 @@ form.search > input {
     }
 
     body > .main-content {
-        padding: 0;
+        /*padding: 0;*/
     }
 }
