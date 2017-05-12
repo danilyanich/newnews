@@ -54,3 +54,22 @@ const on = document.addEventListener;
 const marcoTask = (callback) => {
     setTimeout(callback, 0);
 };
+
+const objectToQuery = (object) => {
+    let string = '?';
+    Object.keys(object).forEach(key => {
+        string += `${key}=${object[key]}`;
+    });
+    return string;
+};
+
+const request = (method, url, query) =>
+    new Promise((resolve, reject) => {
+        let req = new XMLHttpRequest();
+        let queryString = null;
+        if (query) queryString = objectToQuery(query);
+        req.open(method, url + (queryString || ''));
+        req.onload = resolve;
+        req.onabort = reject;
+        req.send();
+    });
