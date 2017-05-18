@@ -63,7 +63,7 @@ const objectToQuery = (object) => {
     return string;
 };
 
-const request = (method, url, query) =>
+const request = (method, url, query, json) =>
     new Promise((resolve, reject) => {
         let req = new XMLHttpRequest();
         let queryString = null;
@@ -71,5 +71,8 @@ const request = (method, url, query) =>
         req.open(method, url + (queryString || ''));
         req.onload = event => resolve(event.target);
         req.onabort = event => reject(event.target);
-        req.send();
+        if (json) {
+            req.setRequestHeader('content-type', 'application/json');
+            req.send(JSON.stringify(json));
+        } else req.send();
     });
