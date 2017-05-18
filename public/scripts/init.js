@@ -58,7 +58,7 @@ const marcoTask = (callback) => {
 const objectToQuery = (object) => {
     let string = '?';
     Object.keys(object).forEach(key => {
-        string += `${key}=${object[key]}`;
+        string += `${key}=${object[key]}&`;
     });
     return string;
 };
@@ -69,7 +69,7 @@ const request = (method, url, query) =>
         let queryString = null;
         if (query) queryString = objectToQuery(query);
         req.open(method, url + (queryString || ''));
-        req.onload = resolve;
-        req.onabort = reject;
+        req.onload = event => resolve(event.target);
+        req.onabort = event => reject(event.target);
         req.send();
     });
