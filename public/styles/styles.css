@@ -10,13 +10,6 @@
 
     box-shadow: var(--elevation-12);
 
-    animation: side-menu-slide 300ms var(--ease);
-}
-
-@keyframes side-menu-slide {
-    from {
-        transform: translateX(calc(var(--line-wrap)*-5));
-    }
 }
 
 body {
@@ -41,6 +34,50 @@ body {
 .intro > .bar {
     display: flex;
     align-items: center;
+}
+/*----------------------------------------------------------------------------*/
+
+
+.intro .login-form {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+
+    z-index: 45;
+
+    width:auto;
+    height: auto;
+}
+
+.login-form .bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.login-form img {
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.login-form .author {
+    margin: var(--line-margin);
+    margin-left: 0px;
+}
+
+.login-form .button.logout, .button.sign-in  {
+    background: blue;
+    --ripple-color: var(--button-ripple-color);
+}
+
+.login-form .button.logout {
+    margin-top: 8px;
+}
+
+.login-form input {
+    height: 36px;
 }
 
 

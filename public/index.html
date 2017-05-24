@@ -72,8 +72,8 @@
 
 
     <template id="add-edit-form-template">
-        <span class="roboto dark author"></span>
-        <span class="roboto gray timing"></span>
+        <div class="roboto dark author"></div>
+        <div class="roboto gray timing"></div>
     </template>
 
 
@@ -107,6 +107,33 @@
 
                 <div class="button no-scope account ripple overflow centered">
                     <i class="material-icons md-light md-24">account_circle</i>
+                </div>
+
+
+                <div class="login-form card wrap" style="display: none;">
+
+                    <div class="logged" style="display: none;">
+                        <div class="bar inner wrap">
+                            <img src="" class="author-avatar"></img>
+                            <div class="roboto centered gray author headline"></div>
+                        </div>
+                        <div class="bar inner centered wrap">
+                            <div class="button roboto rect ripple logout">
+                                logout
+                            </div>
+                        </div>
+                    </div>
+
+                    <form name="login">
+                        <input class="roboto subheading dark" type="text" name="username" placeholder="Login" value="">
+                        <input class="roboto subheading dark" type="password" name="password" placeholder="Password" value="">
+                        <div class="bar inner centered wrap">
+                            <button name="submit" class="button roboto rect ripple sign-in">
+                                sign in
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
 
             </div>
@@ -145,7 +172,7 @@
 
             <div class="add-form-glimpse ripple overflow">
                 <img class="avatar" src=""></img>
-                <div class="roboto subheading gray line centered">
+                <div class="roboto subheading gray line centered whatsnew">
                     What's new?
                 </div>
                 <button name="submit" class="button no-scope ripple overflow centered send">
