@@ -20,33 +20,38 @@ const auth = (() => {
 
     const uiTweak = (show) => {
         if (show) {
-            Array.prototype.forEach(menu => {
+            [].forEach.call(qsA('.button.post-menu'), menu => {
                 menu.style.display = '';
-            }, qsA('.post-menu'));
-            qs('.wrap.add-form-glimpse-wrap').style.display = '';
+            });
+            qs('.wrap.add-form-wrap').style.display = '';
+            qs('form .add-form-glimpse .avatar').src = getUser().avatar;
         } else {
-            Array.prototype.forEach(menu => {
+            [].forEach.call(qsA('.button.post-menu'), menu => {
                 menu.style.display = 'none';
-            }, qsA('.post-menu'));
-            qs('.wrap.add-form-glimpse-wrap').style.display = 'none';
+            });
+            qs('.wrap.add-form-wrap').style.display = 'none';
         }
         return show;
     };
 
     const authorize = (username, password) => {
-        if (username && password)
+        if (username && password && users[username]) {
             if (users[username].password === password) {
                 currentUser = username;
                 return uiTweak(true);
             }
+        }
         return uiTweak(false);
     };
 
     const getUser = () => {
-        return {
-            user: currentUser,
-            avatar: users[currentUser].avatar
-        };
+        if (currentUser) {
+            return {
+                user: currentUser,
+                avatar: users[currentUser].avatar
+            };
+        }
+        return false;
     };
 
     const getUserData = (user) => {
