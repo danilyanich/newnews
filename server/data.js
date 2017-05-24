@@ -104,6 +104,7 @@ const addExample = () => {
         });
     }
 };
+addExample();
 
 const getMultiple = (config) =>
     new Promise((resolve, reject) => {
@@ -166,9 +167,8 @@ const getMultiple = (config) =>
         };
     });
 
-const getById = (id) => {
-    return storage.data[id];
-};
+const getById = (id) =>
+    Promise.resolve(storage.data[id]);
 
 const validator = {
     title: x => x && typeof (x) === 'string' && x.length < 100,
@@ -178,55 +178,49 @@ const validator = {
     content: x => x && typeof (x) === 'string'
 };
 
-const isValid = (id, obj) => {
-    if (!obj) return false;
-    if (id && typeof (id) === 'string') {
-        return !validator.keys().some(check => {
-            if (!validator[check](obj[check]))
-                return true;
-            return false;
-        });
-    }
-    return false;
-};
-
-const add = (id, obj) => {
-    if (!isValid(id, obj))
-        return false;
-    storage.push(id, obj);
-    return true;
-};
-
-const edit = (id, obj) => {
-    let article = deepCopy(storage.data[id]);
-    if (article) {
-        let edited = Object.assign(article, obj);
-        if (isValid(edited)) {
-            storage.push(id, edited);
-            return true;
+const isValid = (id, obj) =>
+    new Promise((resolve, reject) => {
+        if (!obj) reject();
+        if (id && typeof (id) === 'string') {
+            !validator.keys().some(check => {
+                if (!validator[check](obj[check]))
+                    return true;
+                return false;
+            }) && resolve();
         }
-    }
-    return false;
-};
+        reject();
+    });
 
-const remove = storage.remove;
+const add = (id, obj) =>
+    new Promise((resolve, reject) => {
+        if (!isValid(id, obj))
+            reject();
+        storage.push(id, obj);
+        resolve(id);
+    });
 
-const getByIndex = (index) => {
-    return storage.data[storage.order[index]];
-};
+const edit = (id, obj) =>
+    new Promise((resolve, reject) => {
+        let article = deepCopy(storage.data[id]);
+        if (article) {
+            let edited = Object.assign(article, obj);
+            if (isValid(edited)) {
+                storage.push(id, edited);
+                resolve(id);
+            }
+        }
+        reject();
+    });
 
-const size = () => {
-    return storage.order.length;
-};
+const remove = (id) =>
+    Promise.resolve(id)
+    .then(_id => storage.remove(_id));
 
 module.exports = {
     getMultiple: getMultiple,
     getById: getById,
-    getByIndex: getByIndex,
     isValid: isValid,
     add: add,
     edit: edit,
-    remove: remove,
-    example: addExample,
-    size: size
+    remove: remove
 };
