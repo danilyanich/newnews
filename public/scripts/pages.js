@@ -89,6 +89,7 @@ const pages = (() => {
     qs('.show-more').on('click', showMore);
 
     return {
+        reveal: revealSingle,
         applyFilter: applyFilter,
         showMore: showMore
     };
