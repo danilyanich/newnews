@@ -1,24 +1,4 @@
 
-#overlay {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
-    background: rgba(0, 0, 0, 0.5);
-
-    display: flex;
-    /*align-items: center;*/
-    justify-content: center;
-
-    z-index: 60;
-
-    overflow-y: scroll;
-}
-
-#overlay .post {
-    margin: var(--margin) auto auto auto;
-}
-
 #side-menu {
     position: fixed;
     width: calc(var(--line-wrap)*5);
@@ -104,6 +84,8 @@ body {
 
     width: inherit;
     height: auto;
+
+    transition: var(--transition);
 }
 
 
@@ -124,6 +106,8 @@ body {
 .post {
     width: 100%;
     box-sizing: border-box;
+
+    /*transition: var(--transition);*/
 }
 
 .post .top-bar {
@@ -140,6 +124,30 @@ body {
 
     width: auto;
     margin-right: auto;
+}
+
+.top-bar .menu-insertion {
+    position: absolute;
+
+    right: 8px;
+    top: 8px;
+
+    width: auto;
+    height: auto;
+
+    z-index: 40;
+    background: white;
+
+    box-shadow: var(--elevation-1);
+}
+
+.menu-insertion .material-icons {
+    height: 56px;
+    width: 56px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .post .card {
@@ -307,9 +315,10 @@ form.search > input {
 
 .button.show-full {
     margin-left: auto;
-    --ripple-color: var(--button-white-ripple-color);
     padding: 16px;
     height: inherit;
+
+    --ripple-color: var(--button-white-ripple-color);
 }
 
 
@@ -323,14 +332,14 @@ form.search > input {
 
 /*----------------------------------------------------------------------------*/
 
-.wrap.add-form-glimpse-wrap {
+
+.wrap.add-form-wrap {
     animation: 300ms add-form-glimpse-slide-animation;
 }
 
 .add-form-glimpse {
     display: flex;
     justify-content: space-between;
-    margin: 8px;
 }
 
 .add-form-glimpse img {
@@ -344,6 +353,11 @@ form.search > input {
     margin-right: auto;
 }
 
+.add-form-glimpse .author, .timing {
+    font-size: calc(var(--sp)*15);
+    font-weight: 400;
+}
+
 .add-form-glimpse .send {
     color: var(--pink600);
     --ripple-color: var(--pink600);
@@ -353,7 +367,6 @@ form.search > input {
     padding: 16px;
 }
 
-
 @keyframes add-form-glimpse-slide-animation {
     from {
         transform: translateY(-72px);
@@ -361,6 +374,48 @@ form.search > input {
     to {
         transform: translateY(0);
     }
+}
+
+.add-form .wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-form .split {
+    margin: 0px;
+}
+
+.add-form textarea, input {
+    margin: 8px;
+    width: auto;
+    display: block;
+
+    outline: none;
+    border: none;
+}
+
+.add-form .image-drop {
+    min-height: 64px;
+    margin: 8px -8px;
+    background: var(--blueGray50);
+}
+
+.image-drop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.add-form .expand .button {
+    padding: 16px;
+    height: inherit;
+
+    --ripple-color: var(--button-white-ripple-color);
+}
+
+.button.post-info {
+    margin-left: auto;
+    color: red;
 }
 
 

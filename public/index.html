@@ -3,16 +3,24 @@
 <head>
 
 
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!--build:css styles.min.css-->
     <link href="styles/material.css" rel="stylesheet" type="text/css">
     <link href="styles/main.css" rel="stylesheet" type="text/css">
     <link href="styles/styles.css" rel="stylesheet" type="text/css">
+    <!--endbuild-->
+
+
 
 
 </head>
 <body>
+
+
 
 
     <template id="post-template">
@@ -30,6 +38,10 @@
                 <i class="material-icons md-dark md-24">more_vert</i>
             </div>
 
+            <div class="menu-insertion" style="display: none">
+                <i class="material-icons md-dark md-24 delete">delete</i>
+                <i class="material-icons md-dark md-24 edit">mode_edit</i>
+            </div>
         </div>
 
         <div class="title-wrap">
@@ -39,60 +51,38 @@
 
         <div class="wrap">
             <div class="roboto body-1 dark summary"></div>
+            <div class="roboto body-1 dark summary content" style="display: none"></div>
             <div class="wrap inner">
                 <div class="roboto body-1 gray centered tags"></div>
             </div>
         </div>
-
 
         <div class="split"></div>
 
-        <div class="bar inner bottom-bar">
-            <div class="button no-hover ripple centered overflow like">
-                <i class="material-icons md-24">favorite</i>
-            </div>
-            <div class="roboto subheading dark centered like-count">9124</div>
+        <div class="bar inner bottom-bar expand">
             <div class="roboto gray button line ripple centered show-full">
-                show full
+                <span>show full</span>
+                <i class="material-icons">expand_more</i>
             </div>
         </div>
 
     </div></div></template>
 
 
-    <template id="detailed-post-template">
-    <div class="wrap post" style="max-width: calc(var(--line-wrap)*11);">
-    <div class="card ripple">
 
-        <div class="title-wrap">
-            <img src=""></img>
-            <div class="roboto title"></div>
-        </div>
-        <div class="wrap">
 
-            <div class="roboto body-1 dark summary"></div>
-            <!-- after summary -->
-            <div class="roboto body-1 dark summary content"></div>
+    <template id="add-edit-form-template">
+        <span class="roboto dark author"></span>
+        <span class="roboto gray timing"></span>
+    </template>
 
-            <div class="wrap inner">
-                <div class="roboto body-1 gray centered tags"></div>
-                <div class="roboto caption gray centered info"></div>
-            </div>
 
-            <!-- after info -->
-            <div class="split"></div>
-            <div class="buttons-wrap wrap">
-                <div class="roboto gray button line ripple centered overflow delete">delete</div>
-                <div class="roboto gray button line ripple centered overflow edit">edit</div>
-                <i class="material-icons md-24 ripple overflow centered md-dark like">favorite</i>
-            </div>
 
-        </div>
 
-    </div></div></template>
+    <div id="side-menu" style="display: none;"></div>
 
-    <div id="overlay" style="display: none"></div>
-    <div id="side-menu" style="display: none"></div>
+
+
 
     <div class="intro">
 
@@ -115,12 +105,13 @@
                     <i class="material-icons md-light md-24">refresh</i>
                 </div>
 
-                <div class="button no-scope more ripple overflow centered">
-                    <i class="material-icons md-light md-24">more_vert</i>
+                <div class="button no-scope account ripple overflow centered">
+                    <i class="material-icons md-light md-24">account_circle</i>
                 </div>
 
             </div>
         </div>
+
 
         <div class="search-bar bar wrap">
         <form class="search card ripple" name="searchInput">
@@ -134,27 +125,64 @@
 
     </div>
 
+
+
+
     <!-- floating plus -->
     <span id="plus" class="button circle big ripple centered">
         <i class="material-icons md-light md-24 centered">keyboard_arrow_up</i>
     </span>
 
 
+
+
     <!-- main content -->
     <div class="wrap overflow main-content">
 
-        <div class="wrap add-form-glimpse-wrap" style="display: none">
-        <div class="add-form-glimpse card ripple">
+        <div class="wrap add-form-wrap" style="display: none;">
+        <div class="card">
+        <form class="add-edit-form" name="addEditForm">
 
-            <img src=""></img>
-            <div class="roboto subheading gray line centered">
-                What's new?
-            </div>
-            <div class="button no-scope ripple overflow centered send">
-                <i class="material-icons md-24">send</i>
+            <div class="add-form-glimpse ripple overflow">
+                <img class="avatar" src=""></img>
+                <div class="roboto subheading gray line centered">
+                    What's new?
+                </div>
+                <button name="submit" class="button no-scope ripple overflow centered send">
+                    <i class="material-icons md-24">send</i>
+                </button>
             </div>
 
-        </div></div>
+            <div class="add-form" style="display: none;">
+
+                <div class="split"></div>
+
+                <div class="wrap">
+                    <input class="roboto dark title" name="title" placeholder="Title"></input>
+
+                    <div class="image-drop roboto gray centered">
+                        Drop an image here!
+                    </div>
+
+                    <textarea class="roboto dark body-1" name="summary" placeholder="Summary"></textarea>
+                    <textarea class="roboto dark body-1" name="content" placeholder="Content"></textarea>
+
+                    <input class="roboto dark subheading" type="text" name="tags" placeholder="Tags">
+                </div>
+
+                <div class="split"></div>
+
+                <div class="bar inner bottom-bar expand">
+                    <div class="roboto gray button line ripple centered close">
+                        <i class="material-icons">close</i>
+                    </div>
+                    <div class="roboto gray button line centered post-info"></div>
+                </div>
+
+            </div>
+
+        </form></div></div>
+
 
         <div id="post-placeholder" class="wrap inner"></div>
 
@@ -166,7 +194,10 @@
     </div>
 
 
+
+
     <div>
+        <!--build:js script.min.js-->
         <script type="text/javascript" src="scripts/init.js"></script>
         <script type="text/javascript" src="scripts/data.js"></script>
         <script type="text/javascript" src="scripts/dom.js"></script>
@@ -175,7 +206,10 @@
         <script type="text/javascript" src="scripts/ripple.js"></script>
         <script type="text/javascript" src="scripts/logica.js"></script>
         <script type="text/javascript" src="scripts/main.js"></script>
+        <!--endbuild-->
     </div>
+
+
 
 
 </body>
