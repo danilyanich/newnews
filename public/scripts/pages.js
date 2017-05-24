@@ -7,25 +7,26 @@ const pages = (() => {
         pass = id('post-placeholder').firstElementChild;
     };
 
-    const niceReveal = (event) => {
-        if (!pass) resetCurrentRevalingElement();
-        else if (pass.getBoundingClientRect().bottom < window.innerHeight) {
-            pass.qs('.card').style.display = 'block';
-            let nextPass = pass.nextElementSibling;
-            if (nextPass && nextPass.matches('.wrap.post')) {
-                pass = nextPass;
-            }
+    const revealSingle = (element) => {
+        if (element.getBoundingClientRect().bottom < window.innerHeight) {
+            element.qs('.card').style.display = '';
+            pass = element;
         }
     };
 
-    const forceReveal = () => {
-        for (let element of id('post-placeholder').qsA('.wrap.post')) {
-            if (element.getBoundingClientRect().bottom < window.innerHeight) {
-                element.qs('.card').style.display = '';
-                pass = element;
-            }
+    const niceReveal = () => {
+        if (!pass) resetCurrentRevalingElement();
+        else if (pass.getBoundingClientRect().bottom < window.innerHeight) {
+            revealSingle(pass);
+            let nextPass = pass.nextElementSibling;
+            if (nextPass && nextPass.matches('.wrap.post'))
+                pass = nextPass;
         }
     };
+
+    const forceReveal = () =>
+        [].forEach.call(id('post-placeholder').qsA('.wrap.post'),
+            revealSingle);
 
     let page = {
         offset: 0,
@@ -34,21 +35,20 @@ const pages = (() => {
 
     let currentFilter = null;
 
-    const showMore = (event) => {
-        let pairs = data.getMultiple(page, currentFilter);
-
-        if (page.offset <= data.lastQueryLength())
-            page.offset += page.count;
-        if (page.offset >= data.lastQueryLength())
-            qs('.show-more').style.visibility = 'hidden';
-
-        pairs.forEach(pair => {
-            marcoTask(() => {
-                dom.add(pair.id, pair.article, 'append');
+    const showMore = () => {
+        data.getMultiple(page, currentFilter)
+        .then(data => {
+            if (page.offset <= data.lastQueryLength)
+                page.offset += page.count;
+            if (page.offset >= data.lastQueryLength)
+                qs('.show-more').style.visibility = 'hidden';
+            data.pairs.forEach(pair => {
+                marcoTask(() => {
+                    dom.add(pair.id, pair.article, 'append');
+                    revealSingle(id(pair.id));
+                });
             });
         });
-
-        marcoTask(forceReveal);
     };
 
     const applyFilter = (filter) => {
@@ -72,8 +72,12 @@ const pages = (() => {
         event.preventDefault();
         let string = document.forms.searchInput.search.value;
         let config = {};
+
         let tags = string.split(/\s+/).filter(tag => tag.match(/#\w+/)).map(tag => tag.replace('#', ''));
+        let author = string.match(/by\s+(\w+)/);
+
         if (tags.length) config.tags = tags;
+        if (author && author[1]) config.author = author[1];
 
         applyFilter(config);
     };
