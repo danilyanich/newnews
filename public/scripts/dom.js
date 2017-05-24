@@ -21,7 +21,10 @@ const dom = (() => {
         }
         post.qs('.title').innerText = article.title;
         post.qs('.author').innerText = article.author;
-        post.qs('.author-avatar').src = auth.getUserData(article.author).avatar;
+
+        auth.getUserData(article.author)
+        .then(user => (post.qs('.author-avatar').src = user.avatar));
+
         post.qs('.timing').innerHTML = article.createdAt.prettyFormat();
         post.qs('.summary').innerText = article.summary;
         post.qs('.content').innerText = article.content;
