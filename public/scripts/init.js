@@ -18,8 +18,6 @@ Object.deepCopy = (object) => {
     return copy;
 };
 
-HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-
 HTMLElement.prototype.querySelectorParent = function querySelectorParent(query) {
     let element = this;
     while (element) {
@@ -45,8 +43,8 @@ const qsA = (query) => {
 };
 
 
-const id = (id) => {
-    return document.getElementById(id);
+const id = (_id) => {
+    return document.getElementById(_id);
 };
 
 const on = document.addEventListener;
@@ -76,3 +74,13 @@ const request = (method, url, query, json) =>
             req.send(JSON.stringify(json));
         } else req.send();
     });
+
+const checkResponse = (response) =>
+    new Promise((resolve, reject) => {
+        if (response.status !== 200)
+            reject(new Error(`request ${response.responseURL} failed`));
+        else resolve(response);
+    });
+
+const parseResponseText = (response) =>
+    JSON.parse(response.responseText);
