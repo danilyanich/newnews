@@ -3,28 +3,13 @@
 const auth = (() => {
     let currentUser = null;
 
-    const users = {
-        'danilyanich': {
-            password: 'keklol',
-            avatar: 'https://lh3.googleusercontent.com/-z3GchwNOeWI/Uzmi-PIwKAI/AAAAAAAABP4/3pFszaKio_EOnsGIVdvin9C5_wIwQ0luwCEw/w139-h140-p/RLa_CZvWdpY.jpg'
-        },
-        'admin': {
-            password: 'admin',
-            avatar: 'https://ssl.gstatic.com/images/branding/product/1x/avatar_square_blue_512dp.png'
-        },
-        'Google': {
-            password: 'goo.gl',
-            avatar: 'https://i.stack.imgur.com/Ga0da.png'
-        }
-    };
-
     const uiTweak = (show) => {
         if (show) {
             [].forEach.call(qsA('.button.post-menu'), menu => {
                 menu.style.display = '';
             });
             qs('.wrap.add-form-wrap').style.display = '';
-            qs('form .add-form-glimpse .avatar').src = getUser().avatar;
+            qs('form .add-form-glimpse .avatar').src = currentUser.avatar;
         } else {
             [].forEach.call(qsA('.button.post-menu'), menu => {
                 menu.style.display = 'none';
@@ -34,40 +19,39 @@ const auth = (() => {
         return show;
     };
 
-    const authorize = (username, password) => {
-        if (username && password && users[username]) {
-            if (users[username].password === password) {
-                currentUser = username;
-                return uiTweak(true);
-            }
-        }
-        return uiTweak(false);
-    };
+    const authorize = (username, password) =>
+        request('PUT', '/login', null, {
+            username: username,
+            password: password
+        })
+        .then(checkResponse)
+        .then(parseResponseText)
+        .then(user => {
+            currentUser = user;
+            uiTweak(true);
+            return user;
+        })
+        .catch(err => {
+            uiTweak(false);
+            throw new Error('invalid username or password');
+        });
 
-    const getUser = () => {
-        if (currentUser) {
-            return {
-                user: currentUser,
-                avatar: users[currentUser].avatar
-            };
-        }
-        return false;
-    };
+    const getUserData = (username) =>
+        request('GET', `/user/${username}`)
+        .then(checkResponse)
+        .then(parseResponseText);
 
-    const getUserData = (user) => {
-        return {
-            avatar: users[user].avatar
-        };
-    };
+    const getUser = () => currentUser;
 
-    const isAuthorized = () => {
-        return currentUser !== null;
-    };
+    const logout = () =>
+        request('PUT', '/goodbye')
+        .then(() => uiTweak(false))
+        .catch();
 
     return {
         authorize: authorize,
         getUser: getUser,
         getUserData: getUserData,
-        isAuthorized: isAuthorized
+        logout: logout
     };
 })();
