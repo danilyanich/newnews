@@ -28,13 +28,19 @@ const dom = (() => {
         let tags = '<div>' + article.tags.join('</div><div>') + '</div>';
         post.qs('.tags').innerHTML = tags;
 
+        if (!auth.getUser())
+            post.qs('.button.post-menu').style.display = 'none';
+
         return postWrap;
     };
 
-    const remove = (id) => {
-        Error();
-        let postWrap = id(id).parentNode;
-        if (postWrap) postWrap.parentNode.removeChild(postWrap);
+    const remove = (_id) => {
+        let post = id(_id);
+        if (post) {
+            post.parentNode.removeChild(post);
+            return true;
+        }
+        return false;
     };
 
     const clear = () => {
@@ -50,6 +56,7 @@ const dom = (() => {
     };
 
     const add = (id, article, way) => {
+        remove(id);
         let pair = {
             id: id,
             article: article
