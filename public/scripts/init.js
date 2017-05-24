@@ -78,7 +78,7 @@ const request = (method, url, query, json) =>
 const checkResponse = (response) =>
     new Promise((resolve, reject) => {
         if (response.status !== 200)
-            reject(new Error(`request ${response.responseURL} failed`));
+            reject(new Error(`(${response.status}) request ${response.responseURL} failed: ${response.responseText}`));
         else resolve(response);
     });
 
