@@ -1,7 +1,6 @@
 'uses strict';
 
-const logica = (() => {
-
+/* logica */ (() => {
     const animation = {
         fade: [
             { opacity: '0.0' },
@@ -10,91 +9,105 @@ const logica = (() => {
         slide: [
             { transform: 'translateY(var(--line-wrap)) scale(0.9)' },
             { transform: 'translateY(0px) scale(1)' }
+        ],
+        sideMenu: [
+            { transform: 'translateX(calc(var(--line-wrap)*-5))' },
+            { transform: 'translateX(0)' }
         ]
-    }
+    };
 
     const timing = {
         normal: {
-            duration: 200,
+            duration: 300,
             direction: 'normal',
-            easing: 'ease-out'
+            easing: 'cubic-bezier(0.4, 0.0, 1, 1)'
         },
         reverse: {
-            duration: 400,
+            duration: 300,
             direction: 'reverse',
-            easing: 'ease-in'
+            easing: 'cubic-bezier(0.0, 0.0, 0.2, 1)'
         }
     };
 
-    const openOverlay = (callback) => {
-        qs('body').style.overflowY = 'hidden';
-        let overlay = id('overlay');
-        overlay.style.display = '';
-        if(callback)
-            overlay.animate(animation.fade, timing.normal)
-                .onfinish = callback;
-        return overlay;
-    }
 
-    const closeOverlay = (callback) => {
-        let overlay = id('overlay');
-        qs('body').style.overflowY = 'scroll';
-        overlay.animate(animation.fade, timing.reverse)
-            .onfinish = () => {
-                overlay.style.display = 'none';
-                overlay.innerHTML = '';
-                if (callback) callback();
+    /* detailed post template */
+    const detailed = (() => {
+        const open = (post) => {
+            post.qs('.button.show-full span').innerText = 'close';
+            post.qs('.button.show-full i').innerText = 'expand_less';
+            post.setAttribute('opened', true);
+
+            post.qs('.card').style['box-shadow'] = 'var(--elevation-8)';
+            post.style.padding = '8px 0px';
+
+            post.qs('.article-image').style['max-height'] = 'none';
+
+            let content = post.qs('.content');
+            content.style.display = '';
+            content.animate(
+                animation.fade,
+                timing.normal
+            );
+        };
+
+        const close = (post) => {
+            let content = post.qs('.content');
+            content.style.display = 'none';
+
+            post.qs('.button.show-full span').innerText = 'show full';
+            post.qs('.button.show-full i').innerText = 'expand_more';
+            post.removeAttribute('opened');
+
+            post.qs('.article-image').style['max-height'] = '';
+
+            post.qs('.card').style['box-shadow'] = '';
+            post.style.padding = '';
+        };
+
+        const openMenu = (post) => {
+            let menu = post.qs('.menu-insertion');
+            menu.style.display = '';
+            menu.animate(
+                animation.fade,
+                timing.normal
+            );
+
+            post.setAttribute('menu-opened', true);
+        };
+
+        const closeMenu = (post) => {
+            let menu = post.qs('.menu-insertion');
+            menu.animate(
+                animation.fade,
+                timing.reverse
+            ).onfinish = () => {
+                menu.style.display = 'none';
             };
-        if (overlay.firstElementChild)
-            overlay.firstElementChild.animate(animation.slide, timing.reverse);
-    }
 
-    var closeOverlayEvent = (event) => {
-        if(event.target === event.currentTarget) {
-            event.preventDefault();
-            closeOverlay();
-        }
-    }
+            post.removeAttribute('menu-opened');
+        };
 
-    id('overlay').on('click', closeOverlayEvent);
-
-    let detailed = (() => {
-        let template = id('detailed-post-template');
-
-        const open = (_id) => {
-
-            openOverlay();
-
-            let article = data.getById(_id);
-            let content = template.content.cloneNode(true);
-            let post = content.querySelector('.card');
-
-            if (article.image)
-                post.qs('img').src = article.image;
-            else {
-                post.qs('img').style.display = 'none';
-                post.qs('.title').classList.add('dark');
-                post.qs('.title').classList.add('no-image');
+        id('post-placeholder').on('click', (event) => {
+            let parent = event.target.querySelectorParent('.post');
+            if (parent) {
+                if (event.target.querySelectorParent('.button.show-full')) {
+                    if (parent.getAttribute('opened')) close(parent);
+                    else open(parent, parent.id);
+                } else if (event.target.querySelectorParent('.button.post-menu')) {
+                    if (auth.getUser())
+                        openMenu(parent, parent.id);
+                } else if (event.target.matches('.menu-insertion .edit')) {
+                    addEditForm.open(null, parent.id);
+                    id('plus').click();
+                    closeMenu(parent);
+                } else if (parent.getAttribute('menu-opened'))
+                    closeMenu(parent);
             }
-            post.qs('.title').innerHTML = article.title;
-            post.qs('.info').innerHTML = '<span class="author">' + article.author + '</span>' +
-                article.createdAt.prettyFormat();
-            post.qs('.summary').innerHTML = article.summary;
-            post.qs('.content').innerHTML = article.content;
-            let tags = '<div>' +  article.tags.join('</div><div>') + '</div>';
-            post.qs('.tags').innerHTML = tags;
-
-            id('overlay').appendChild(content);
-        }
-
-        // id('post-placeholder').on('click', (event) => {
-        //     if (event.target.querySelectorParent('.post-menu')) {
-        //         let parent = event.target.querySelectorParent('.post');
-        //         if (parent) open(parent.id);
-        //     }
-        // });
+        });
     })();
 
+
+    /* refresh button */
     qs('.button.refresh').on('click', (event) => {
         event.target.animate([
             { transform: 'rotate(0deg)' },
@@ -108,258 +121,253 @@ const logica = (() => {
         pages.applyFilter(null);
     });
 
-    /*var addEditForm = (function () {
 
-        var editAddForm = document.getElementById('edit-add-form-template');
+    /* scroll to top */
+    const easeInOutQuad = (t) =>
+        (t < 0.5 ? 2 * t * t : -1 + ((4 - (2 * t)) * t));
+    const mainContent = qs('.main-content');
+    id('plus').on('click', () => {
+        let max = mainContent.scrollTop;
+        let progress = 0;
+        let stop = 200;
+        let scroll = setInterval(() => {
+            progress += 10;
+            let alpha = 1 - (progress / stop);
+            mainContent.scrollTop = max * easeInOutQuad(alpha);
+            if (progress >= stop)
+                clearInterval(scroll);
+        }, 10);
+    });
+
+
+    /* add and edit form template */
+    const addEditForm = (() => {
+        let opened = false;
+        const template = id('add-edit-form-template');
+        const form = document.forms.addEditForm;
+
+        const open = (event, id) => {
+            form.qs('.add-form').style.display = '';
+
+            let whatsnew = form.qs('.whatsnew');
+            whatsnew.innerHTML = '';
+            whatsnew.style['flex-direction'] = 'column';
+            let info = template.content.cloneNode(true);
+            info.querySelector('.author').innerText = auth.getUser().username;
+            info.querySelector('.timing').innerText = new Date().prettyFormat();
+            whatsnew.appendChild(info);
+
+            if (id) {
+                data.getById(id)
+                .then(article => {
+                    form.title.value = article.title;
+                    form.summary.value = article.summary;
+                    form.content.value = article.content;
+                    form.tags.value = article.tags.join(' ');
+
+                    if (article.image) {
+                        form.qs('.image-drop').innerHTML =
+                            `<img src="${article.image}"></img>`;
+                    }
+
+                    form.setAttribute('edit-id', id);
+
+                    opened = true;
+                }).catch(alert);
+            } else {
+                if (opened) return;
+
+                form.title.value = '';
+                form.summary.value = '';
+                form.content.value = '';
+                form.tags.value = '';
+                form.qs('.image-drop').innerText = 'Drop an image here!';
+
+                form.removeAttribute('edit-id');
+            }
+            opened = true;
+        };
+        form.qs('.add-form-glimpse').on('click', open);
+
+        const close = (event) => {
+            form.qs('.add-form').style.display = 'none';
+            form.qs('.whatsnew').innerHTML = 'What\'s new?';
+            opened = false;
+        };
+        form.qs('.expand .close').on('click', close);
 
         // saving article
-        var saveArtice = function (event) {
-            var tagsline = document.forms.edit.tags.value;
-            tagsline = tagsline.replace('#', ' ');
-            var now = new Date();
-            var article = {
-                id: '' + now.getTime(),
-                title: document.forms.edit.caption.value,
-                summary: document.forms.edit.summary.value,
-                createdAt: now,
-                author: authorization.getUser(),
-                content: document.forms.edit.content.value,
-                tags: tagsline.split(' ')
-            }
-            var result = dom.add(article);
-            var image = document.querySelector('#dragndrop img');
-            if (image) article.image = image.src;
-            if (result) {
-                database.addArticle(article);
-                document.querySelector('span.form-button.discard').click();
-            } else {
-                alert('invalid article');
-            }
-        }
+        const postArticle = (event) =>
+            new Promise((resolve, reject) => {
+                event.preventDefault();
+                if (!opened) reject(new Error('form not opened'));
+
+                let tagsline = form.tags.value;
+                tagsline = tagsline.replace('#', ' ');
+                let now = new Date();
+                let article = {
+                    title: form.title.value,
+                    summary: form.summary.value,
+                    createdAt: +now,
+                    author: auth.getUser().username,
+                    content: form.content.value,
+                    tags: tagsline.split(' ')
+                };
+
+                let image = qs('.image-drop img');
+                if (image) article.image = image.src;
+                resolve(article);
+            })
+            .then(article => {
+                let editId = form.getAttribute('edit-id');
+                if (editId)
+                    return data.edit(editId, article);
+                return data.add(article);
+            })
+            .then(pair => {
+                dom.add(pair.id, pair.article);
+                pages.reveal(id(pair.id));
+                /* close form */close();
+            })
+            .catch(err => {
+                let info = form.qs('.expand .post-info');
+                info.innerText = 'invalid';
+                setTimeout(() => {
+                    info.innerText = '';
+                }, 3000);
+            });
+
+        form.onsubmit = postArticle;
 
         // dragndrop emplementation
-        function allowDrop(event) {
+        const imageDrop = form.qs('.image-drop');
+        imageDrop.on('dragover', (event) => event.preventDefault(), false);
+        imageDrop.on('drop', (event) => {
             event.preventDefault();
-        }
+            let path = event.dataTransfer.getData('text');
+            let image = document.createElement('img');
 
-        function drop(event) {
-            event.preventDefault();
-            var path = event.dataTransfer.getData('text');
-            var image = document.createElement('img');
-            var callback = function (exists) {
-                if(exists) {
-                    var container = document.querySelector('#dragndrop');
-                    container.innerHTML = '';
-                    container.appendChild(image);
-                } else {
+            const callback = (exists) => {
+                if (exists) {
+                    imageDrop.innerHTML = '';
+                    imageDrop.appendChild(image);
+                } else
                     alert('only links to images allowed');
-                }
-            }
-            image.onerror = function () { callback(false); };
-            image.onload = function () { callback(true); };
+            };
+
+            image.onerror = () => callback(false);
+            image.onload = () => callback(true);
+
             image.src = path;
-        }
+        }, false);
+
 
         // textareas are resizing to fit content
-        var resize = function (event) {
-            event.currentTarget.style.height = event.currentTarget.scrollHeight +'px';
-        }
-
-        // click on wrap / cross button closes the form
-        var checkUnsaved = function() {
-            return !(document.forms.edit.caption.value === '' &&
-                document.forms.edit.summary.value === '' &&
-                document.forms.edit.content.value === '' &&
-                document.forms.edit.tags.value === '');
-        }
-
-        var closeAddEditForm = function (event) {
-            var cross = document.querySelector('div.fullscreen-scrollable-wrap div.middle-wrap svg.light-svg');
-            var discard = document.querySelector('span.form-button.discard');
-            if(event.target === cross || event.target === discard || event.target.parentNode === cross) {
-                if (checkUnsaved() && event.target !== discard) alert('unsaved form');
-                var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-                fswrap.removeEventListener('click', closeAddEditForm);
-                closeFullscreenWrap(fswrap);
-            }
-        }
-
-        // plus button opens add form, and sets it's content to default
-        var openAddEditForm = function (event) {
-            var copy = editAddForm.content.cloneNode(true);
-            var form = copy.querySelector('form');
-
-            form.querySelector('.info-bar').innerHTML =
-                (new Date()).prettyFormat() + ' by' +
-                '<span>' + authorization.getUser() + '</span>';
-
-            var fswrap = openFullscreenWrap();
-
-            fswrap.addEventListener('click', closeAddEditForm);
-            linkAddEditFormEvents(copy);
-            fswrap.appendChild(copy);
-            fswrap.firstElementChild.animate(slide, timing.normal);
-        }
-
-        // link all events
-        function linkAddEditFormEvents(form) {
-            form.getElementById('dragndrop').addEventListener('dragover', allowDrop, false);
-            form.getElementById('dragndrop').addEventListener('drop', drop, false);
-            form.querySelector('span.form-button.add').addEventListener('click', saveArtice);
-            for (var textarea of form.querySelectorAll('textarea')) {
-                textarea.addEventListener('keypress', resize);
-            }
-        }
+        const resize = (event) => {
+            event.currentTarget.style.height = event.currentTarget.scrollHeight + 'px';
+        };
+        [].forEach.call(form.qsA('textarea'), textarea =>
+            textarea.on('keypress', resize));
 
         return {
-            open: openAddEditForm
-        }
-
+            open: open
+        };
     })();
 
-    var authorizationForm = (function () {
 
-        var authorizationForm = document.getElementById('authorization-form-template');
+    const loginForm = (() => {
+        let opened = false;
+        let formPlaceholder = qs('.intro .login-form');
+        let logged = formPlaceholder.qs('.logged');
+        let form = document.forms.login;
 
-        var closeAuthorizationForm = function (event) {
-            var form =  event.currentTarget.querySelector('form');
-            var button = event.currentTarget.querySelector('form > button');
+        const open = () => {
+            formPlaceholder.style.display = '';
+            formPlaceholder.animate(
+                animation.fade,
+                timing.normal
+            );
+            opened = true;
+        };
 
-            if (event.target == button) {
-                var login = form.login.value;
-                var password = form.password.value;
-                firebase.auth().signInWithEmailAndPassword(login, password).then(function () {
-                    authorization.changeUser(login.replace(/@.*//*,''));
-                    authorization.authorize();
-                    var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-                    fswrap.removeEventListener('click', closeAuthorizationForm);
-                    closeFullscreenWrap(fswrap);
-                }).catch(function(error) {
-                    alert(error.code + ':' + error.message);
-                });
-            }
-        }
+        const close = () => {
+            formPlaceholder.animate(
+                animation.fade,
+                timing.reverse
+            ).onfinish = () => {
+                formPlaceholder.style.display = 'none';
+                opened = false;
+            };
+        };
 
-        var openAuthorizationForm = function (event) {
-            if (authorization.isAuthorized()) {
-                firebase.auth().signOut().then(function() {
-                    alert('logout');
-                    authorization.changeUser(null);
-                    authorization.authorize();
-                }).catch(function(error) {
-                    alert(error.code + ':' + error.message);
-                });
-            } else {
-                var copy = authorizationForm.content.cloneNode(true);
-                var form = copy.querySelector('form');
+        const logIn = (event) => {
+            event.preventDefault();
+            let username = form.username.value;
+            let password = form.password.value;
+            auth.authorize(username, password)
+            .then(user => {
+                logged.qs('img').src = user.avatar;
+                logged.qs('.author').innerText = user.username;
+                /* close form */close();
+                setTimeout(() => {
+                    logged.style.display = '';
+                    form.style.display = 'none';
+                }, 400);
+            })
+            .catch(alert);
+        };
 
-                var fswrap = openFullscreenWrap();
+        const logOut = (event) =>
+            auth.logout()
+            .then(err => {
+                logged.qs('img').src = '';
+                logged.qs('.author').innerText = '';
+                logged.style.display = 'none';
+                form.style.display = '';
+                form.animate(
+                    animation.fade,
+                    timing.normal
+                );
+            });
 
-                fswrap.addEventListener('click', closeAuthorizationForm);
-                fswrap.appendChild(copy);
-                fswrap.firstElementChild.animate(slide, timing.normal);
-            }
-        }
+        form.onsubmit = logIn;
 
-        return {
-            open: openAuthorizationForm
-        }
+        formPlaceholder.qs('.button.logout').on('click', logOut);
 
+        qs('body').on('click', (event) => {
+            if (event.target.querySelectorParent('.intro .button.account'))
+                open();
+            else if (!event.target.querySelectorParent('.intro .login-form'))
+                close();
+        });
     })();
 
-    var search = function () {
-        var filter = {};
-        var query = document.forms.searchInput.search.value;
-        var tags = query.split(/\s+/).filter(tag => tag.match(/#\w+/));
-        if (tags.length) {
-            tags = tags.map(tag => tag.replace('#',''));
-            filter.tags = tags;
-        }
 
-        pagination.applyFilter(filter);
-        return false;
-    }
+    const sideMenu = (() => {
+        const menu = id('side-menu');
 
-    var detailedForm = (function (){
+        const open = (event) => {
+            menu.style.display = '';
+            menu.animate(
+                animation.sideMenu,
+                timing.normal
+            );
+        };
 
-        var detailedForm = document.getElementById('detailed-form-template');
+        const close = (event) => {
+            menu.animate(
+                animation.sideMenu,
+                timing.reverse
+            ).onfinish = () => {
+                menu.style.display = 'none';
+            };
+        };
 
-        var closeDetailedForm = function (event) {
-            var fswrap = document.querySelector('div.fullscreen-scrollable-wrap');
-            if (event.target.matches('span.form-button.add')){
-
-            } else if (event.target.matches('span.form-button.discard')){
-                var id =  event.target.querySelectorParent('.middle-content')
-                                            .getAttribute('opened-post');
-                fswrap.removeEventListener('click', closeDetailedForm);
-                alert('post deleted');
-                closeFullscreenWrap(fswrap);
-                dom.remove(id);
-                data.remove(id);
-            } else if (event.target.matches('svg.light-svg') ||
-                event.target.matches('span.form-button')) {
-                fswrap.removeEventListener('click', closeDetailedForm);
-                closeFullscreenWrap(fswrap);
-            }
-        }
-
-        var openDetailedForm = function (article) {
-            var copy = detailedForm.content.cloneNode(true);
-            post = copy.querySelector('.middle-content');
-
-            post.setAttribute('opened-post', article.id);
-            if(article.image) {
-                post.querySelector('img').src = article.image;
-            } else {
-                post.querySelector('img').style.display = 'none';
-                post.querySelector('.post-caption').style.marginTop = '15px';
-            }
-            post.querySelector('.post-caption').innerHTML = article.title;
-            post.querySelector('.info-bar').innerHTML =
-                article.createdAt.prettyFormat() + ' by' +
-                '<span class="link-text">' + article.author + '</span>';
-            post.querySelector('.summary').innerHTML = article.summary;
-            post.querySelector('.post-content').innerHTML = article.content;
-            var tags = '<span class="link-text">' + article.tags.join('</span><span class="link-text">') + '</span>';
-            post.querySelector('.tags-line .tags').innerHTML = tags;
-
-            var fswrap = openFullscreenWrap();
-
-            fswrap.addEventListener('click', closeDetailedForm);
-            fswrap.appendChild(copy);
-            fswrap.firstElementChild.animate(slide, timing.normal);
-        }
-
-        return {
-            open: openDetailedForm
-        }
-
+        qs('body').on('click', (event) => {
+            if (event.target.querySelectorParent('.intro .button.menu'))
+                open();
+            else if (!event.target.querySelectorParent('#side-menu'))
+                close();
+        });
     })();
-
-    var postPlaceholderEventHandler = function (event) {
-        var post = event.target.querySelectorParent('div.post.strong-shadow')
-        if (!post) return;
-        var id = post.id;
-        var article = data.getByIndex(data.getById(id));
-        if (event.target.matches('div.post-caption.link-text') ||
-            event.target.matches('img')) {
-            detailedForm.open(article);
-        } else if (event.target.matches('div.info-bar.v-align > span.link-text')) {
-            pagination.applyFilter({author: article.author});
-        } else if (event.target.matches('div.tags-line.v-align > span.link-text')) {
-            pagination.applyFilter({tags: article.tags});
-        } else if (event.target.matches('span.tags > span.link-text')) {
-            pagination.applyFilter({tags: [event.target.innerText]});
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', function (event) {
-        // link events
-        // document.querySelector('div.fullscreen-scrollable-wrap').addEventListener('click', closeFullscreenWrapEvent);
-        document.getElementById('plus').addEventListener('click', addEditForm.open);
-        // document.querySelector('header.header.v-align div.v-align').addEventListener('click', authorizationForm.open);
-        document.forms.searchInput.onsubmit = search;
-        document.querySelector('#post-placeholder').addEventListener('click', postPlaceholderEventHandler);
-    });*/
-
 })();
