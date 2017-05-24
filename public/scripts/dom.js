@@ -19,11 +19,12 @@ const dom = (() => {
             post.qs('.title').classList.add('no-image');
             post.qs('.top-bar').style.marginBottom = '-8px';
         }
-        post.qs('.title').innerHTML = article.title;
-        post.qs('.author').innerHTML = article.author;
+        post.qs('.title').innerText = article.title;
+        post.qs('.author').innerText = article.author;
         post.qs('.author-avatar').src = auth.getUserData(article.author).avatar;
         post.qs('.timing').innerHTML = article.createdAt.prettyFormat();
-        post.qs('.summary').innerHTML = article.summary;
+        post.qs('.summary').innerText = article.summary;
+        post.qs('.content').innerText = article.content;
         let tags = '<div>' + article.tags.join('</div><div>') + '</div>';
         post.qs('.tags').innerHTML = tags;
 
@@ -42,11 +43,9 @@ const dom = (() => {
 
     const display = (pairs) => {
         pairs.forEach(pair => {
-            marcoTask(() => {
-                handle.appendChild(
-                    makePostHTML(pair)
-                );
-            });
+            marcoTask(() =>
+                handle.appendChild(makePostHTML(pair))
+            );
         });
     };
 
