@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 
-app.get('/post', (req, res) => {
+app.get('/posts', (req, res) =>
     data.getMultiple(req.query)
     .then(pairs => {
         res.json(pairs);
@@ -25,26 +25,23 @@ app.get('/post', (req, res) => {
     })
     .catch(reason => {
         res.writeHead(500);
-        res.write('Internal Error');
+        res.write(`Internal Error ${reason}`);
         res.end();
-    });
-});
+    }));
 
 
-app.get('/post/:id', (req, res) => {
-    let article = data.getById(res.params.id);
-    if (article) {
-        res.json(article);
-        res.end();
-    } else {
-        res.writeHead(404);
-        res.write('NOT FOUND');
-        res.end();
-    }
-});
+app.get('/posts/:id', (req, res) =>
+    data.getById(req.params.id)
+    .then(article => {
+        if (article) {
+            res.json(article);
+            res.end();
+        } else {
+            res.writeHead(404);
+            res.write('NOT FOUND');
+            res.end();
+        }
+    }));
 
 
-app.listen(port, error => {
-    if (!error)
-        data.example();
-});
+app.listen(port);
