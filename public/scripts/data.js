@@ -35,13 +35,19 @@ const data = (() => {
         .then(parseResponseText)
         .then(pair => {
             pair.article = obj;
+            pair.article.createdAt = new Date(pair.article.createdAt);
             return pair;
         });
 
     const edit = (id, obj) =>
         request('PATCH', `/upload/${id}`, null, obj)
         .then(checkResponse)
-        .then(parseResponseText);
+        .then(parseResponseText)
+        .then(pair => {
+            pair.article = obj;
+            pair.article.createdAt = new Date(pair.article.createdAt);
+            return pair;
+        });
 
     const remove = () => false;
 
