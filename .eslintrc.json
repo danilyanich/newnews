@@ -10,7 +10,7 @@
     "rules": {
         "curly": [
             "error",
-            "multi"
+            "multi-or-nest"
         ],
         "indent": [
             "error",
@@ -41,6 +41,10 @@
         ],
         "no-undef": [
             "warn"
+        ],
+        "no-unused-expressions": [
+            "error",
+            { "allowShortCircuit": true }
         ]
     }
 }

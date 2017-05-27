@@ -19,22 +19,22 @@ const authorize = (username, password) =>
     new Promise((resolve, reject) => {
         if (username && password) {
             if (users[username].password === password) {
-                currentUser = username;
-                return uiTweak(true);
+                return resolve({
+                    username: username,
+                    avatar: users[username].avatar
+                });
             }
         }
-        return uiTweak(false);
+        return reject(new Error('invalid username or password'));
     });
 
-const getUserData = (user) => {
-    return {
-        avatar: users[user].avatar
-    };
-};
+const getUserData = (username) =>
+    Promise.resolve({
+        username: username,
+        avatar: users[username].avatar
+    });
 
 module.exports = {
     authorize: authorize,
-    getUser: getUser,
-    getUserData: getUserData,
-    isAuthorized: isAuthorized
+    getUserData: getUserData
 };

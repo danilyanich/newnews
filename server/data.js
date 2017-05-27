@@ -16,8 +16,10 @@ const updateTags = {
     },
     remove: (id, tags) => {
         tags.forEach(tag => {
-            if (storage.tags[tag])
-                storage.tags[tag].remove(id);
+            if (storage.tags[tag]) {
+                let index = storage.tags[tag].indexOf(id);
+                storage.tags[tag].splice(index, 1);
+            }
         });
     }
 };
@@ -25,16 +27,18 @@ const updateTags = {
 storage.push = (id, article) => {
     storage.data[id] = article;
     if (!storage.order.includes(id))
-        storage.order.push(id);
+        storage.order.unshift(id);
     else updateTags.remove(id, article.tags);
     updateTags.add(id, article.tags);
 };
 
 storage.remove = (id) => {
     let article = storage.data[id];
+    if (!article) return false;
     storage.order.remove(id);
     updateTags.remove(id, article.tags);
     delete storage.data[id];
+    return true;
 };
 
 const addExample = () => {
@@ -92,24 +96,13 @@ const addExample = () => {
         content: 'When elements move between positions or states, the movement should be fast enough that it doesn\'t cause waiting, but slow enough that the transition can be understood. Keep transitions short as users will see them frequently.',
         tags: ['speed', 'balance', 'easing']
     });
-
-    for (let i = 0; i < 10000; i += 1) {
-        storage.push('' + i, {
-            title: 'title' + i,
-            summary: 'summary' + i,
-            createdAt: new Date(i),
-            author: 'danilyanich',
-            content: 'content' + i,
-            tags: ['tag' + Math.ceil(Math.random() * i), 'tag' + Math.ceil(Math.random() * i)]
-        });
-    }
 };
 addExample();
 
 const getMultiple = (config) =>
     new Promise((resolve, reject) => {
         if (!config)
-            reject(`config = ${config}`);
+            reject(new Error('undefined config!'));
         else {
             let slice = storage.order.slice();
             resolve(slice);
@@ -168,7 +161,11 @@ const getMultiple = (config) =>
     });
 
 const getById = (id) =>
-    Promise.resolve(storage.data[id]);
+    new Promise((resolve, reject) => {
+        let article = storage.data[id];
+        if (article) resolve(article);
+        else reject(new Error(`no article with id=${id}`));
+    });
 
 const validator = {
     title: x => x && typeof (x) === 'string' && x.length < 100,
@@ -178,49 +175,38 @@ const validator = {
     content: x => x && typeof (x) === 'string'
 };
 
-const isValid = (id, obj) =>
-    new Promise((resolve, reject) => {
-        if (!obj) reject();
-        if (id && typeof (id) === 'string') {
-            !validator.keys().some(check => {
-                if (!validator[check](obj[check]))
-                    return true;
-                return false;
-            }) && resolve();
-        }
-        reject();
-    });
+const isValid = (id, obj) => {
+    if (!obj) return false;
+    if (id && typeof (id) === 'string') {
+        return !Object.keys(validator).some(check => {
+            if (!validator[check](obj[check]))
+                return true;
+            return false;
+        });
+    }
+    return false;
+};
 
 const add = (id, obj) =>
     new Promise((resolve, reject) => {
-        if (!isValid(id, obj))
-            reject();
-        storage.push(id, obj);
-        resolve(id);
-    });
-
-const edit = (id, obj) =>
-    new Promise((resolve, reject) => {
-        let article = deepCopy(storage.data[id]);
-        if (article) {
-            let edited = Object.assign(article, obj);
-            if (isValid(edited)) {
-                storage.push(id, edited);
-                resolve(id);
-            }
-        }
-        reject();
+        let edited = Object.assign(storage.data[id] || {}, obj);
+        if (isValid(id, edited)) {
+            storage.push(id, edited);
+            resolve(id, edited);
+        } else
+            reject(new Error(`invalid article ${id}`));
     });
 
 const remove = (id) =>
     Promise.resolve(id)
-    .then(_id => storage.remove(_id));
+    .then(_id => {
+        if (!storage.remove(_id))
+            throw new Error('no article, so not removed!');
+    });
 
 module.exports = {
     getMultiple: getMultiple,
     getById: getById,
-    isValid: isValid,
     add: add,
-    edit: edit,
     remove: remove
 };
